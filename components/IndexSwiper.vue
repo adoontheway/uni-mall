@@ -1,18 +1,10 @@
 <template>
 	<view>
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
-			<swiper-item>
-				<image class="swiper-img" src="../static/img/swiper0.png"></image>
+			<swiper-item v-for="(item, index) in dataList" :key="index">
+				<image class="swiper-img" :src="item.imgUrl"></image>
 			</swiper-item>
-			<swiper-item>
-				<image class="swiper-img" src="../static/img/swiper1.png"></image>
-			</swiper-item>
-			<swiper-item>
-				<image class="swiper-img" src="../static/img/swiper2.png"></image>
-			</swiper-item>
-			<swiper-item>
-				<image class="swiper-img" src="../static/img/swiper3.png"></image>
-			</swiper-item>
+			
 		</swiper>
 	</view>
 </template>
@@ -24,6 +16,9 @@
 			return {
 				
 			};
+		},
+		props:{
+			dataList:Array,
 		}
 	}
 </script>

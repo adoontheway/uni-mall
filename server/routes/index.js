@@ -1,6 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
+router.all("*", (req,res, next)=> {
+	res.header("Access-Control-Allow-Origin","*");
+	res.header("Access-Control-Allow-Headers","COntent-Type");
+	res.header("Access-Control-Allow-Methods","*");
+	next();
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -24,29 +31,29 @@ router.get('/api/index_list/data', function(req, res, next) {
 			  {
 				  type:"swiperList",
 				  data:[
-					  {imgUrl:"../static/img/swiper0.png"},
-					  {imgUrl:"../static/img/swiper1.png"},
-					  {imgUrl:"../static/img/swiper2.png"},
-					  {imgUrl:"../static/img/swiper3.png"}
+					  {imgUrl:"../../static/img/swiper0.png"},
+					  {imgUrl:"../../static/img/swiper1.png"},
+					  {imgUrl:"../../static/img/swiper2.png"},
+					  {imgUrl:"../../static/img/swiper3.png"}
 				  ]
 			  },
 			  {
 				  type:"recommendList",
 				  data:[
 					  {
-						  bigImg:"../static/img/1.jpeg",
+						  bigImg:"../../static/img/1.jpeg",
 						  data:[
-							  "../static/img/item0.jpeg",
-							  "../static/img/item1.jpeg",
-							  "../static/img/item2.jpeg"
+							  "../../static/img/item0.jpeg",
+							  "../../static/img/item1.jpeg",
+							  "../../static/img/item2.jpeg"
 						  ]
 					  },
 					  {
-						  bigImg:"../static/img/1.jpeg",
+						  bigImg:"../../static/img/1.jpeg",
 						  data:[
-							  "../static/img/item13.jpeg",
-							  "../static/img/item14.jpeg",
-							  "../static/img/item17.jpeg"
+							  "../../static/img/item13.jpeg",
+							  "../../static/img/item14.jpeg",
+							  "../../static/img/item17.jpeg"
 						  ]
 					  }
 				  ]

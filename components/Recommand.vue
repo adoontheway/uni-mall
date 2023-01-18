@@ -1,22 +1,16 @@
 <template>
 	<view class="recommand bg-color">
-		<view class="recommand-item">
-			<image class="item-big" src="../static/img/1.jpeg"></image>
+		<view class="recommand-item" v-for="(item, index) in dataList" :key="index">
+			<image class="item-big" :src="item.bigImg"></image>
 			<view class="item-small">
-				<image class="img-small" src="../static/img/item0.jpeg"></image>
-				<image class="img-small" src="../static/img/item1.jpeg"></image>
-				<image class="img-small" src="../static/img/item2.jpeg"></image>
+				<block v-for="(v,k) in item.data" :key="k">
+					<image  class="img-small" :src="v"></image>
+				</block>
+				
 			</view>
 		</view>
 		
-		<view class="recommand-item">
-			<image class="item-big" src="../static/img/1.jpeg"></image>
-			<view class="item-small">
-				<image class="img-small" src="../static/img/17.jpeg"></image>
-				<image class="img-small" src="../static/img/13.jpeg"></image>
-				<image class="img-small" src="../static/img/14.jpeg"></image>
-			</view>
-		</view>
+		
 	</view>
 </template>
 
@@ -27,6 +21,9 @@
 			return {
 				
 			};
+		},
+		props:{
+			dataList:Array
 		}
 	}
 </script>

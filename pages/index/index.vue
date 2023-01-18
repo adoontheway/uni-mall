@@ -26,18 +26,19 @@
 				:style="'height:'+contentHeight+'px'"
 			>
 				<swiper-item
-					v-for="(item, index) in topBar"
+					v-for="(item, index) in newTopBar"
 					:key="index"
 				>
+				
+		
 				<view id="main-data">
-					<Banner></Banner>
-					<Icons></Icons>
-					<Card cardTitle="热销爆品"></Card>
-					<Hot></Hot>
-					<Card cardTitle="推荐店铺"></Card>
-					<Shop></Shop>
-					<Card cardTitle="为您推荐"></Card>
-					<CommodityList></CommodityList>
+					<block v-for="(v,k) in item.data" :key="k">
+						<!-- {{v}} -->
+						<IndexSwiper v-if="v.type === 'swiperList'" :dataList="v.data"></IndexSwiper>
+						<Recommand v-if="v.type === 'recommendList'" :dataList="v.data"></Recommand>
+						<Card cardTitle="猜你喜欢"></Card>
+						<CommodityList v-if="v.type === 'comodityList'" :dataList="v.data"></CommodityList>
+					</block>
 				</view>
 				
 				</swiper-item>
@@ -84,7 +85,8 @@
 					// {name:"数码家具",id:6},
 					// {name:"食品母婴",id:7},
 					// {name:"萌宠生活",id:8},
-				]
+				],
+				newTopBar:{}
 			}
 		},
 		components:{
@@ -103,7 +105,7 @@
 		onReady(){
 			uni.createSelectorQuery().select('#main-data').boundingClientRect(data=>{
 				// this.contentHeight = data.height;
-				this.contentHeight = 1200;
+				this.contentHeight = 2000;
 			}).exec();
 		},
 		methods: {
@@ -112,10 +114,24 @@
 					url:"http://192.168.1.4:3000/api/index_list/data",
 					success:(res )=> {
  						let data = res.data.data;
-						console.log(data.topBar);
 						this.topBar = data.topBar;
+						this.newTopBar = this.initData(data);
+						// console.log(JSON.stringify(this.newTopBar))
 					}
 				})
+			},
+			initData(res){
+				let arr = [];
+				for(let i = 0; i < this.topBar.length; i++){
+					let obj = {
+						data:[]
+					}
+					if( i == 0){
+						obj.data = res.data;
+					}
+					arr.push(obj);
+				}
+				return arr;
 			},
 			selectTab(id){
 				this.curTabIdx = id;
