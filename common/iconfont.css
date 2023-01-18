@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3860710 */
+  /* 这里改成了本地地址 */
+  src: url('./static/iconfont.ttf?t=1673447908803') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fenxiang:before {
+  content: "\e739";
+}
+
+.icon-shangjiantou:before {
+  content: "\e611";
+}
+
+.icon-gouwuche:before {
+  content: "\e899";
+}
+
+.icon-xiaoxi:before {
+  content: "\e8bd";
+}
+
+.icon-fangdajing:before {
+  content: "\e687";
+}
+
+.icon-lajitong:before {
+  content: "\e609";
+}
+
+.icon-arrow-down:before {
+  content: "\e610";
+}
+
