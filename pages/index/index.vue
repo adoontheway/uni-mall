@@ -29,39 +29,63 @@
 					v-for="(item, index) in newTopBar"
 					:key="index"
 				>
-				
-		
-				<view id="main-data">
-					<block v-for="(v,k) in item.data" :key="k">
-						<!-- {{v}} -->
-						<IndexSwiper v-if="v.type === 'swiperList'" :dataList="v.data"></IndexSwiper>
-						<Recommand v-if="v.type === 'recommendList'" :dataList="v.data"></Recommand>
-						<Card cardTitle="猜你喜欢"></Card>
-						<CommodityList v-if="v.type === 'comodityList'" :dataList="v.data"></CommodityList>
-					</block>
-				</view>
+					<scroll-view 
+						scroll-y="true" 
+						:style="'height:'+contentHeight+'px'"
+						@scrolltolower="loadMore(index)"
+					>
+						<block v-if="item.data.length > 0">
+						
+							<block v-for="(v,k) in item.data" :key="k">
+								<!-- 推荐模版-->
+								<!-- {{v}} -->
+								<IndexSwiper v-if="v.type === 'swiperList'" :dataList="v.data"></IndexSwiper>
+								<template v-if="v.type === 'recommendList'">
+									<Recommand  :dataList="v.data"></Recommand>
+									<Card cardTitle="猜你喜欢"></Card>
+								</template>
+								
+								<!-- 其他模版-->
+								<Banner v-if="v.type === 'bannerList'" :imgUrl="v.imgUrl"></Banner>
+								
+								<template v-if="v.type === 'iconsList'">
+									<Icons  :dataList="v.data"></Icons>
+									<Card cardTitle="热销爆品"></Card>
+								</template>
+								<template v-if="v.type === 'hotList'">
+									<Hot  :dataList="v.data"></Hot>
+									<Card cardTitle="推荐店铺"></Card>
+								</template>
+								<template v-if="v.type === 'shopList'">
+									<Shop  :dataList="v.data"></Shop>
+									<Card cardTitle="为您推荐"></Card>
+								</template>
+								
+								<!-- card放这里app显示不正常	 -->
+								<CommodityList v-if="v.type === 'comodityList'"  :dataList="v.data"></CommodityList>
+								
+								
+								
+							</block>
+						</block>
+						<view v-else>
+							暂无数据...
+						</view>
+						
+						<view class="load-text f-color">
+							{{item.loadText}}
+						</view>
+					</scroll-view>
+						
 				
 				</swiper-item>
 			</swiper>
-		<!-- 推荐模版 -->
-		<!-- <IndexSwiper></IndexSwiper>
-		<Recommand></Recommand>
-		<Card cardTitle="猜你喜欢"></Card>
-		<CommodityList></CommodityList> -->
 		
-		<!-- 其他模版 -->
-		<!-- <Banner></Banner>
-		<Icons></Icons>
-		<Card cardTitle="热销爆品"></Card>
-		<Hot></Hot>
-		<Card cardTitle="推荐店铺"></Card>
-		<Shop></Shop>
-		<Card cardTitle="为您推荐"></Card>
-		<CommodityList></CommodityList> -->
 	</view>
 </template>
 
 <script>
+	import $http from "@/common/api/request.js";
 	import IndexSwiper from "@/components/IndexSwiper.vue";
 	import Recommand from "@/components/Recommand.vue"
 	import Card from "@/components/Card.vue"
@@ -77,14 +101,7 @@
 				scrollViewIdx:'child0',
 				contentHeight:0,
 				topBar:[
-					// {name:"推荐",id:1},
-					// {name:"运动户外",id:2},
-					// {name:"服饰内衣",id:3},
-					// {name:"鞋靴箱包",id:4},
-					// {name:"美妆个护",id:5},
-					// {name:"数码家具",id:6},
-					// {name:"食品母婴",id:7},
-					// {name:"萌宠生活",id:8},
+					
 				],
 				newTopBar:{}
 			}
@@ -103,28 +120,35 @@
 			this.__init();
 		},
 		onReady(){
-			uni.createSelectorQuery().select('#main-data').boundingClientRect(data=>{
-				// this.contentHeight = data.height;
-				this.contentHeight = 2000;
-			}).exec();
+			uni.getSystemInfo({
+				success:(res)=>{
+					// console.log(JSON.stringify(res));
+					this.contentHeight = res.windowHeight - uni.upx2px(80);
+				},
+			})
+			
 		},
 		methods: {
 			__init(){
-				uni.request({
-					url:"http://192.168.1.4:3000/api/index_list/data",
-					success:(res )=> {
- 						let data = res.data.data;
-						this.topBar = data.topBar;
-						this.newTopBar = this.initData(data);
-						// console.log(JSON.stringify(this.newTopBar))
-					}
-				})
+				$http.request({
+					url:"/index_list/data",
+				}).then((res)=>{
+					this.topBar = res.topBar;
+					this.newTopBar = this.initData(res);
+				}).catch((e)=>{
+					console.log("bad request",e);
+					uni.showToast({
+						title:"请求失败",
+						icon:"none"
+					})
+				});
 			},
 			initData(res){
 				let arr = [];
 				for(let i = 0; i < this.topBar.length; i++){
 					let obj = {
-						data:[]
+						data:[],
+						loadText:'上拉加载更多'
 					}
 					if( i == 0){
 						obj.data = res.data;
@@ -136,9 +160,39 @@
 			selectTab(id){
 				this.curTabIdx = id;
 				this.scrollViewIdx = `child${id}`;
+				// 切换标签页不触发加载
+				if(this.newTopBar[id].data.length == 0)
+					this.fetchData();
 			},
 			onTabChanged(e){
 				this.selectTab(e.detail.current);
+			},
+			fetchData(callback){
+				let index = this.curTabIdx;
+				let id = this.topBar[index].id;
+				let page = Math.ceil(this.newTopBar[index].data.length/5)+1;
+				$http.request({
+					url:`/index_list/${id}/data/${page}`,
+				}).then((res)=>{
+					this.newTopBar[index].data = [...this.newTopBar[index].data,...res];
+					if(typeof callback === "function"){
+						callback();
+					}
+				}).catch((e)=>{
+					console.log("bad request",e);
+					uni.showToast({
+						title:"请求失败",
+						icon:"none"
+					})
+				});
+				
+			},
+			//上拉加载更多
+			loadMore(index){
+				this.newTopBar[index].loadText = '加载中...';
+				this.fetchData(()=>{
+					this.loadText = "上拉加载更多...";
+				});
 			}
 		}
 	}
@@ -167,5 +221,10 @@
 	.f-active-color {
 		padding: 10rpx 0;
 		border-bottom: 6rpx solid #49BDFB;
+	}
+	.load-text{
+		border-top: 2rpx solid #636263;
+		line-height: 60rpx;
+		text-align: center;
 	}
 </style>
