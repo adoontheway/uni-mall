@@ -3486,23 +3486,28 @@ var render = function () {
             ],
             1
           ),
-          _c(
-            "uni-view",
-            { attrs: { _i: 6 } },
-            [
-              _c(
+          _vm._$g(6, "i")
+            ? _c(
                 "uni-view",
-                { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
-                [_vm._v("四件套")]
-              ),
-              _c(
+                { attrs: { _i: 6 } },
+                _vm._l(_vm._$g(7, "f"), function (item, index, $20, $30) {
+                  return _c(
+                    "uni-view",
+                    {
+                      key: item,
+                      staticClass: _vm._$g("7-" + $30, "sc"),
+                      attrs: { _i: "7-" + $30 },
+                    },
+                    [_vm._v(_vm._$g("7-" + $30, "t0-0"))]
+                  )
+                }),
+                1
+              )
+            : _c(
                 "uni-view",
                 { staticClass: _vm._$g(8, "sc"), attrs: { _i: 8 } },
-                [_vm._v("面膜")]
+                [_vm._v("暂无搜索记录")]
               ),
-            ],
-            1
-          ),
         ],
         1
       ),
@@ -3825,7 +3830,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 16);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.search-item{\n\tpadding: 20rpx;\n}\n.search-title {\n\tdisplay: flex;\n\tjustify-content: space-between;\n}\n.search-name {\n\tpadding: 4rpx 24rpx;\n\tbackground-color: #e1e1e1;\n\tdisplay: inline-block;\n\tborder-radius: 26rpx;\n\tmargin: 10rpx;\n}\n", ""]);
+exports.push([module.i, "\n.search-item{\n\tpadding: 20rpx;\n}\n.search-title {\n\tdisplay: flex;\n\tjustify-content: space-between;\n}\n.search-name {\n\tpadding: 4rpx 24rpx;\n\tbackground-color: #e1e1e1;\n\tdisplay: inline-block;\n\tborder-radius: 26rpx;\n\tmargin: 10rpx;\n}\n.no-records {\n\ttext-align: center;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -4052,81 +4057,53 @@ var render = function () {
       _c(
         "uni-view",
         { staticClass: _vm._$g(1, "sc"), attrs: { _i: 1 } },
-        [
-          _c(
+        _vm._l(_vm._$g(2, "f"), function (item, index, $20, $30) {
+          return _c(
             "uni-view",
-            { staticClass: _vm._$g(2, "sc"), attrs: { _i: 2 } },
+            {
+              key: item,
+              staticClass: _vm._$g("2-" + $30, "sc"),
+              attrs: { _i: "2-" + $30 },
+              on: {
+                click: function ($event) {
+                  return _vm.$handleViewEvent($event)
+                },
+              },
+            },
             [
-              _c("uni-view", { attrs: { _i: 3 } }, [_vm._v("价格")]),
               _c(
                 "uni-view",
-                { staticClass: _vm._$g(4, "sc"), attrs: { _i: 4 } },
+                { class: _vm._$g("3-" + $30, "c"), attrs: { _i: "3-" + $30 } },
+                [_vm._v(_vm._$g("3-" + $30, "t0-0"))]
+              ),
+              _c(
+                "uni-view",
+                {
+                  staticClass: _vm._$g("4-" + $30, "sc"),
+                  attrs: { _i: "4-" + $30 },
+                },
                 [
                   _c("uni-view", {
-                    staticClass: _vm._$g(5, "sc"),
-                    attrs: { _i: 5 },
+                    staticClass: _vm._$g("5-" + $30, "sc"),
+                    class: _vm._$g("5-" + $30, "c"),
+                    attrs: { _i: "5-" + $30 },
                   }),
                   _c("uni-view", {
-                    staticClass: _vm._$g(6, "sc"),
-                    attrs: { _i: 6 },
+                    staticClass: _vm._$g("6-" + $30, "sc"),
+                    class: _vm._$g("6-" + $30, "c"),
+                    attrs: { _i: "6-" + $30 },
                   }),
                 ],
                 1
               ),
             ],
             1
-          ),
-          _c(
-            "uni-view",
-            { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
-            [
-              _c("uni-view", { attrs: { _i: 8 } }, [_vm._v("折扣")]),
-              _c(
-                "uni-view",
-                { staticClass: _vm._$g(9, "sc"), attrs: { _i: 9 } },
-                [
-                  _c("uni-view", {
-                    staticClass: _vm._$g(10, "sc"),
-                    attrs: { _i: 10 },
-                  }),
-                  _c("uni-view", {
-                    staticClass: _vm._$g(11, "sc"),
-                    attrs: { _i: 11 },
-                  }),
-                ],
-                1
-              ),
-            ],
-            1
-          ),
-          _c(
-            "uni-view",
-            { staticClass: _vm._$g(12, "sc"), attrs: { _i: 12 } },
-            [
-              _c("uni-view", { attrs: { _i: 13 } }, [_vm._v("品牌")]),
-              _c(
-                "uni-view",
-                { staticClass: _vm._$g(14, "sc"), attrs: { _i: 14 } },
-                [
-                  _c("uni-view", {
-                    staticClass: _vm._$g(15, "sc"),
-                    attrs: { _i: 15 },
-                  }),
-                  _c("uni-view", {
-                    staticClass: _vm._$g(16, "sc"),
-                    attrs: { _i: 16 },
-                  }),
-                ],
-                1
-              ),
-            ],
-            1
-          ),
-        ],
+          )
+        }),
         1
       ),
-      _c("NewLine", { attrs: { _i: 17 } }),
-      _c("CommodityList", { attrs: { _i: 18 } }),
+      _c("NewLine", { attrs: { _i: 7 } }),
+      _c("CommodityList", { attrs: { _i: 8 } }),
     ],
     1
   )

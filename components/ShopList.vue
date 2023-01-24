@@ -1,30 +1,25 @@
 <template>
 	<view class="shop-list">
 		<view class="shop-title f-color">
-			<view class="shop-item">
-				<view >价格</view>
+			<view 
+				class="shop-item" 
+				v-for="(item, index) in shopList.data" 
+				:key="index"
+				@tap="changeIndex(index)"
+			>
+				<view :class="shopList.curIndex == index ? 'f-active-color' : '' ">{{item.name}}</view>
 				<view class="shop-icon">
-					<view class="iconfont icon-shangjiantou up"></view>
-					<view class="iconfont icon-arrow-down down"></view>
+					<view 
+						class="iconfont icon-shangjiantou up"
+						:class="item.status == 1 ? 'f-active-color' : ''"
+						>
+					</view>
+					<view 
+						class="iconfont icon-arrow-down down"
+						:class="item.status == 2 ? 'f-active-color' : ''"
+					></view>
 				</view>
 			</view>
-			
-			<view class="shop-item">
-				<view >折扣</view>
-				<view class="shop-icon">
-					<view class="iconfont icon-shangjiantou up"></view>
-					<view class="iconfont icon-arrow-down down"></view>
-				</view>
-			</view>
-			
-			<view class="shop-item">
-				<view >品牌</view>
-				<view class="shop-icon">
-					<view class="iconfont icon-shangjiantou up"></view>
-					<view class="iconfont icon-arrow-down down"></view>
-				</view>
-			</view>
-			
 			
 		</view>
 		<NewLine></NewLine>
@@ -40,6 +35,14 @@
 		name:"ShopList",
 		data() {
 			return {
+				shopList:{
+					curIndex:0,
+					data:[
+						{name:"价格",status:1},
+						{name:"折扣",status:0},
+						{name:"品牌",status:0}
+					]
+				},
 				dataList:[
 					{
 						id:1,
@@ -87,6 +90,19 @@
 		components:{
 			NewLine,
 			CommodityList
+		},
+		methods:{
+			changeIndex(index){
+				console.log(index,this.shopList.curIndex);
+				if(index === this.shopList.curIndex){
+					this.shopList.data[index].status = this.shopList.data[index].status === 1 ? 2 : 1;
+				}else{
+					this.shopList.data[this.shopList.curIndex].status = 0;
+					this.shopList.data[index].status = 1;
+				}
+				
+				this.shopList.curIndex = index;
+			}
 		}
 	}
 </script>
