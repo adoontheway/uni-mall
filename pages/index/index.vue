@@ -128,6 +128,14 @@
 			})
 			
 		},
+		onNavigationBarButtonTap:(e)=>{
+			// console.log(e);
+			if(e.index == 0){
+				uni.navigateTo({
+					url:"/pages/search/search"
+				})
+			}
+		},
 		methods: {
 			__init(){
 				$http.request({
