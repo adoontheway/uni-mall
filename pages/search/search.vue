@@ -4,13 +4,17 @@
 		<view class="search-item">
 			<view class="search-title">
 				<view class="f-color">最近搜索</view>
-				<view class="iconfont icon-lajitong"></view>
+				<view 
+					class="iconfont icon-lajitong"
+					@tap="clearRecords()"
+				></view>
 			</view>
 			<view v-if="searchRecords.length > 0">
 				<view 
 					class="search-name f-color"	
 					v-for="(item,index) in searchRecords"
 					:key="index"
+					@tap="startSearch(item)"
 				>
 					{{item}}
 				</view>
@@ -76,11 +80,8 @@
 						icon:"none"
 					})
 				}else{
-					uni.navigateTo({
-						url:"/pages/search-list/search-list"
-					});
-					uni.hideKeyboard();
-					this.addSearchRecord();
+					this.startSearch(this.keyword);
+					
 				}
 			},
 			addSearchRecord(){
@@ -95,6 +96,31 @@
 					key:"searchRecords",
 					data:JSON.stringify(this.searchRecords)
 				})
+			},
+			clearRecords(){
+				uni.showModal({
+					title:"提示",
+					content:"是否确定要清除搜索记录",
+					cancelText:"取消",
+					confirmText:"确定",
+					success:(res)=> {
+						if(res.confirm){
+							uni.removeStorage({
+								key:"searchRecords"
+							});
+							this.searchRecords = [];
+						}
+						
+					}
+				})
+				
+			},
+			startSearch(value){
+				uni.navigateTo({
+					url:`/pages/search-list/search-list?keyword=${value}`
+				});
+				uni.hideKeyboard();
+				this.addSearchRecord();
 			}
 		}
 	}
