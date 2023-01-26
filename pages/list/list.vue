@@ -3,19 +3,30 @@
 		<NewLine></NewLine>
 		<view class="list">
 			<block v-if="dataList.length > 0">
-				<scroll-view scroll-y="true" class="list-left">
+				<scroll-view 
+					scroll-y="true" 
+					class="list-left"
+					:style="'height:'+contentHeight+'px'"
+				>
 					<view 
 						v-for="(item, index ) in dataList"
 						class="left-item"	
 						:key="index"
 						@tap="selectType(index)"
 					>
-						<view class="left-name">{{item.name}}</view>
+						<view 
+							class="left-name"
+							:class="curIdx === index ? 'left-name-activate' : ''"
+						>{{item.name}}</view>
 					</view>
 					
 				</scroll-view>
 				
-				<scroll-view scroll-y="true" class="list-right">
+				<scroll-view 
+					scroll-y="true" 
+					class="list-right"
+					:style="'height:'+contentHeight+'px'"
+				>
 					<view 
 						class="right-list" 
 						v-for="(v,k) in dataList[curIdx].data"
@@ -50,6 +61,7 @@
 			return {
 				dataList:[],
 				curIdx:0,
+				contentHeight:0,
 			}
 		},
 		onLoad() {
@@ -57,6 +69,15 @@
 		},
 		components:{
 			NewLine
+		},
+		onReady(){
+			uni.getSystemInfo({
+				success:(res)=>{
+					// console.log(JSON.stringify(res));
+					this.contentHeight = res.windowHeight;// - uni.upx2px(80) - this.getClientHeight();
+				},
+			})
+			
 		},
 		onNavigationBarSearchInputClicked() {
 			uni.navigateTo({
@@ -68,7 +89,7 @@
 				$http.request({
 						url:`/goods/list`
 					}).then((res)=>{
-						console.log(JSON.stringify(res));
+						// console.log(JSON.stringify(res));
 						this.dataList = res;
 					}).catch((e)=>{
 						uni.showToast({
@@ -79,6 +100,17 @@
 				},
 				selectType(idx){
 					this.curIdx = idx;
+				},
+				getClientHeight(){
+					const res = uni.getSystemInfoSync();
+					const platform = res.platform;
+					if(platform == "ios"){
+						return 44 + res.statusBarHeight;
+					}else if(platform == "android"){
+						return 48 + res.statusBarHeight;
+					}else{
+						return 0;
+					}
 				}
 			}
 			

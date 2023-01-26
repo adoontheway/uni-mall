@@ -201,7 +201,8 @@
 				this.fetchData(()=>{
 					this.loadText = "上拉加载更多...";
 				});
-			}
+			},
+			
 		}
 	}
 </script>

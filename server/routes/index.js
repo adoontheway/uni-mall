@@ -775,6 +775,18 @@ router.get('/api/goods/list/', function(req, res, next){
 							{id:22, name:"长裤",imgUrl:'../../static/img/item2.jpeg'},
 							{id:23, name:"短裙",imgUrl:'../../static/img/item2.jpeg'},
 							{id:24, name:"连衣裙",imgUrl:'../../static/img/item2.jpeg'},
+							{id:21, name:"上衣",imgUrl:'../../static/img/item2.jpeg'},
+							{id:22, name:"长裤",imgUrl:'../../static/img/item2.jpeg'},
+							{id:23, name:"短裙",imgUrl:'../../static/img/item2.jpeg'},
+							{id:24, name:"连衣裙",imgUrl:'../../static/img/item2.jpeg'},
+							{id:21, name:"上衣",imgUrl:'../../static/img/item2.jpeg'},
+							{id:22, name:"长裤",imgUrl:'../../static/img/item2.jpeg'},
+							{id:23, name:"短裙",imgUrl:'../../static/img/item2.jpeg'},
+							{id:24, name:"连衣裙",imgUrl:'../../static/img/item2.jpeg'},
+							{id:21, name:"上衣",imgUrl:'../../static/img/item2.jpeg'},
+							{id:22, name:"长裤",imgUrl:'../../static/img/item2.jpeg'},
+							{id:23, name:"短裙",imgUrl:'../../static/img/item2.jpeg'},
+							{id:24, name:"连衣裙",imgUrl:'../../static/img/item2.jpeg'},
 						],
 					},
 					{
@@ -785,6 +797,201 @@ router.get('/api/goods/list/', function(req, res, next){
 							{id:32, name:"美妆",imgUrl:'../../static/img/item2.jpeg'},
 						],
 					}
+				]
+			},
+			{
+				id:3,
+				name:"家居家纺",
+				data:[
+					{
+						name:"家纺",
+						data:[
+							{id:1, name:"毛巾",imgUrl:'../../static/img/item2.jpeg'},
+							{id:2, name:"枕头",imgUrl:'../../static/img/item2.jpeg'},
+							{id:3, name:"被子",imgUrl:'../../static/img/item2.jpeg'},
+							{id:4, name:"被套",imgUrl:'../../static/img/item2.jpeg'},
+						],
+					},
+				]
+			},
+			{
+				id:3,
+				name:"家居家纺",
+				data:[
+					{
+						name:"家纺",
+						data:[
+							{id:1, name:"毛巾",imgUrl:'../../static/img/item2.jpeg'},
+							{id:2, name:"枕头",imgUrl:'../../static/img/item2.jpeg'},
+							{id:3, name:"被子",imgUrl:'../../static/img/item2.jpeg'},
+							{id:4, name:"被套",imgUrl:'../../static/img/item2.jpeg'},
+						],
+					},
+				]
+			},
+			{
+				id:3,
+				name:"家居家纺",
+				data:[
+					{
+						name:"家纺",
+						data:[
+							{id:1, name:"毛巾",imgUrl:'../../static/img/item2.jpeg'},
+							{id:2, name:"枕头",imgUrl:'../../static/img/item2.jpeg'},
+							{id:3, name:"被子",imgUrl:'../../static/img/item2.jpeg'},
+							{id:4, name:"被套",imgUrl:'../../static/img/item2.jpeg'},
+						],
+					},
+				]
+			},
+			{
+				id:3,
+				name:"家居家纺",
+				data:[
+					{
+						name:"家纺",
+						data:[
+							{id:1, name:"毛巾",imgUrl:'../../static/img/item2.jpeg'},
+							{id:2, name:"枕头",imgUrl:'../../static/img/item2.jpeg'},
+							{id:3, name:"被子",imgUrl:'../../static/img/item2.jpeg'},
+							{id:4, name:"被套",imgUrl:'../../static/img/item2.jpeg'},
+						],
+					},
+				]
+			},
+			{
+				id:3,
+				name:"家居家纺",
+				data:[
+					{
+						name:"家纺",
+						data:[
+							{id:1, name:"毛巾",imgUrl:'../../static/img/item2.jpeg'},
+							{id:2, name:"枕头",imgUrl:'../../static/img/item2.jpeg'},
+							{id:3, name:"被子",imgUrl:'../../static/img/item2.jpeg'},
+							{id:4, name:"被套",imgUrl:'../../static/img/item2.jpeg'},
+						],
+					},
+				]
+			},
+			{
+				id:3,
+				name:"家居家纺",
+				data:[
+					{
+						name:"家纺",
+						data:[
+							{id:1, name:"毛巾",imgUrl:'../../static/img/item2.jpeg'},
+							{id:2, name:"枕头",imgUrl:'../../static/img/item2.jpeg'},
+							{id:3, name:"被子",imgUrl:'../../static/img/item2.jpeg'},
+							{id:4, name:"被套",imgUrl:'../../static/img/item2.jpeg'},
+						],
+					},
+				]
+			},
+			{
+				id:3,
+				name:"家居家纺",
+				data:[
+					{
+						name:"家纺",
+						data:[
+							{id:1, name:"毛巾",imgUrl:'../../static/img/item2.jpeg'},
+							{id:2, name:"枕头",imgUrl:'../../static/img/item2.jpeg'},
+							{id:3, name:"被子",imgUrl:'../../static/img/item2.jpeg'},
+							{id:4, name:"被套",imgUrl:'../../static/img/item2.jpeg'},
+						],
+					},
+				]
+			},
+			{
+				id:3,
+				name:"家居家纺",
+				data:[
+					{
+						name:"家纺",
+						data:[
+							{id:1, name:"毛巾",imgUrl:'../../static/img/item2.jpeg'},
+							{id:2, name:"枕头",imgUrl:'../../static/img/item2.jpeg'},
+							{id:3, name:"被子",imgUrl:'../../static/img/item2.jpeg'},
+							{id:4, name:"被套",imgUrl:'../../static/img/item2.jpeg'},
+						],
+					},
+				]
+			},
+			{
+				id:3,
+				name:"家居家纺",
+				data:[
+					{
+						name:"家纺",
+						data:[
+							{id:1, name:"毛巾",imgUrl:'../../static/img/item2.jpeg'},
+							{id:2, name:"枕头",imgUrl:'../../static/img/item2.jpeg'},
+							{id:3, name:"被子",imgUrl:'../../static/img/item2.jpeg'},
+							{id:4, name:"被套",imgUrl:'../../static/img/item2.jpeg'},
+						],
+					},
+				]
+			},
+			{
+				id:3,
+				name:"家居家纺",
+				data:[
+					{
+						name:"家纺",
+						data:[
+							{id:1, name:"毛巾",imgUrl:'../../static/img/item2.jpeg'},
+							{id:2, name:"枕头",imgUrl:'../../static/img/item2.jpeg'},
+							{id:3, name:"被子",imgUrl:'../../static/img/item2.jpeg'},
+							{id:4, name:"被套",imgUrl:'../../static/img/item2.jpeg'},
+						],
+					},
+				]
+			},
+			{
+				id:3,
+				name:"家居家纺",
+				data:[
+					{
+						name:"家纺",
+						data:[
+							{id:1, name:"毛巾",imgUrl:'../../static/img/item2.jpeg'},
+							{id:2, name:"枕头",imgUrl:'../../static/img/item2.jpeg'},
+							{id:3, name:"被子",imgUrl:'../../static/img/item2.jpeg'},
+							{id:4, name:"被套",imgUrl:'../../static/img/item2.jpeg'},
+						],
+					},
+				]
+			},
+			{
+				id:3,
+				name:"家居家纺",
+				data:[
+					{
+						name:"家纺",
+						data:[
+							{id:1, name:"毛巾",imgUrl:'../../static/img/item2.jpeg'},
+							{id:2, name:"枕头",imgUrl:'../../static/img/item2.jpeg'},
+							{id:3, name:"被子",imgUrl:'../../static/img/item2.jpeg'},
+							{id:4, name:"被套",imgUrl:'../../static/img/item2.jpeg'},
+						],
+					},
+				]
+			},
+			{
+				id:3,
+				name:"家居家纺",
+				data:[
+					{
+						name:"家纺",
+						data:[
+							{id:1, name:"毛巾",imgUrl:'../../static/img/item2.jpeg'},
+							{id:2, name:"枕头",imgUrl:'../../static/img/item2.jpeg'},
+							{id:3, name:"被子",imgUrl:'../../static/img/item2.jpeg'},
+							{id:4, name:"被套",imgUrl:'../../static/img/item2.jpeg'},
+						],
+					},
 				]
 			},
 		]
