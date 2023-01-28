@@ -1,6 +1,6 @@
 export default {
 	common:{
-		baseUrl:"http://192.168.1.8:3000/api",
+		baseUrl:"http://192.168.3.8:3000/api",
 		header:{
 			"Content-Type":"application/json",
 			"Content-Type":"application/x-www-form-urlencoded",

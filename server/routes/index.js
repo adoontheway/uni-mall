@@ -13,6 +13,20 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get("/api/goods/id", function(req, res, next){
+	res.json({
+		code:0,
+		data:  {
+				  	id:6,
+				  	imgUrl:"../../static/img/item0.jpeg",
+				  	name:"Redmi Note 11 5G 天玑810 33W Pro快充 5000mAh大电池 6GB +128GB 神秘黑境 智能手机 小米 红米",
+				  	pprice:"188.00",
+				  	oprice:"399.00",
+				  	discount:"4.0"
+				  },
+	})
+});
+
 router.get('/api/index_list/3/data/1', function(req, res, next) {
   res.json( {
 	  code:0,
