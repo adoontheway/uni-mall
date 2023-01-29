@@ -67,7 +67,13 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						
+					}
+				}
             }
             
         }
@@ -154,6 +160,15 @@
 						]
 					}
 				}
+            }
+            
+        }
+        ,{
+            "path" : "pages/config/config",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设置",
+                "enablePullDownRefresh": false
             }
             
         }

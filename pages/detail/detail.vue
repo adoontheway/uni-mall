@@ -44,7 +44,7 @@
 			class="detail-foot"
 		>
 			<view class="iconfont icon-xiaoxi"></view>
-			<view class="iconfont icon-gouwuche"></view>
+			<view class="iconfont icon-gouwuche" @tap="goCart"></view>
 			<view 
 				class="add-cart"
 				@tap="addCart"
@@ -63,9 +63,13 @@
 				</view>
 				<view class="pop-count">
 					<view>购买数量</view>
-					<NumberBox :min="1"></NumberBox>
+					<NumberBox 
+						:min="1" 
+						:value="num"
+						@change="onNumChange($event)"
+					></NumberBox>
 				</view>
-				<view class="pop-sub">
+				<view class="pop-sub" @tap="addCart">
 					<text>确定</text>
 				</view>
 			</view>
@@ -78,10 +82,13 @@
 	import NumberBox from "@/components/uni/uni-number-box/components/uni-number-box/uni-number-box.vue";
 	import Card from "@/components/Card.vue";
 	import CommodityList from "@/components/CommodityList.vue";
+	
+	import {mapMutations} from "vuex";
 	export default {
 		data() {
 			return {
 				isPop:false,
+				num:1,
 				animationData:{},
 				goodsInfo:{},
 				swiperList:[
@@ -172,6 +179,7 @@
 			}
 		},
 		methods: {
+			...mapMutations(["addGood"]),
 			showPop(){
 				var animation = uni.createAnimation({
 				  duration: 200,
@@ -216,7 +224,24 @@
 					})
 				});
 			},
-			
+			onNumChange(value){
+				this.num = value;
+			},
+			goCart(){
+				uni.switchTab({
+					url:"/pages/cart/cart"
+				})
+			},
+			addCart(){
+				this.goodsInfo['checked'] = false;
+				this.goodsInfo['num'] = this.num; 
+				this.addGood(this.goodsInfo);
+				this.hidePop();
+				uni.showToast({
+					title:'加入购物车成功',
+					icon:'none'
+				})
+			}
 		}
 	}
 </script>

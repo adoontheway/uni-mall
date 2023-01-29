@@ -15,8 +15,12 @@
 					class="shop-item"
 					v-for="(item,index) in dataList"
 					:key="index"
+								
 				>
-					<radio :checked="item.checked">
+					<radio 
+						:checked="item.checked" 
+						@tap="selectItem(index)"
+					>
 						
 					</radio>
 					<image class="shop-img" :src="item.imgUrl"></image>
@@ -25,7 +29,12 @@
 						<view class="shop-color f-color">{{item.desc}}</view>
 						<view class="shop-price">
 							<view>{{item.price}}</view>
-							<view>*{{item.num}}</view>
+							<template v-if="!isEditing">
+								<view>*{{item.num}}</view>
+							</template>
+							<template v-else>
+								<NumberBox :min="1" :value="item.num" @change="changeNum($event, index)"></NumberBox>
+							</template>
 						</view>
 					</view>
 				</view>
@@ -42,9 +51,16 @@
 						全选	
 					</radio>
 				</view>
+					
 				<view class="foot-total">
-					<view class="foot-count ">合计：<text class="f-active-color">¥100.00</text></view>
-					<view class="foot-num">结算：（100.00）</view>
+					<template v-if="isEditing">
+						<view class="foot-count ">合计：<text class="f-active-color">¥{{totalCount.price}}</text></view>
+						<view class="foot-num">结算：（{{totalCount.num}}）</view>
+					</template>	
+					<template v-else>
+						<view class="foot-num" style="background-color: black;">移入收藏夹</view>
+						<view class="foot-num" @tap="delGoods()">删除</view>
+					</template>
 				</view>
 			</view>
 			
@@ -66,30 +82,38 @@
 
 <script>
 	import uniNavBar from "@/components/uni/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue";
-	import {mapState,mapActions,mapGetters} from "vuex";
+	import NumberBox from "@/components/uni/uni-number-box/components/uni-number-box/uni-number-box.vue";
+	import {mapState,mapActions,mapGetters,mapMutations} from "vuex";
 	export default {
 		data() {
 			return {
 				isEditing:false,
-				
 			}
 		},
 		components:{
-			uniNavBar
+			uniNavBar,
+			NumberBox
 		},
 		computed:{
 			...mapState({
 				dataList:state=>state.cart.dataList
 			}),
-			...mapGetters(['checkedAll'])
+			...mapGetters([
+				'checkedAll',
+				'totalCount'
+				])
 		},
 		methods: {
-			...mapActions(['checkAll']),
+			...mapActions(['checkAll','delGoods']),
+			...mapMutations(['selectItem']),
 			onLeftClick(){
 				
 			},
 			onRightClick(){
 				this.isEditing = true;
+			},
+			changeNum(event, index){
+				this.dataList[index].num = event;
 			}
 		}
 	}
