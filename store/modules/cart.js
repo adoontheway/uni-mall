@@ -33,7 +33,7 @@ export default {
 				price:0,
 				num:0,
 			}
-			state.list.forEach(v=>{
+			state.dataList.forEach(v=>{
 				if(state.selectList.indexOf(v.id) != -1){
 					total.price += v.price*v.num;
 				}

@@ -1,36 +1,36 @@
 <template>
 	<view class="config">
-		<view class="config-item">
+		<view class="config-item" @tap="goAddressList">
 			<view>地址管理</view>
-			<view> > </view>
+			<view class="right-mark"> > </view>
 		</view>
 		<view class="config-item">
 			<view>修改密码</view>
-			<view> > </view>
+			<view class="right-mark"> > </view>
 		</view>
 		<view class="config-item">
 			<view>绑定手机号</view>
-			<view> > </view>
+			<view class="right-mark"> > </view>
 		</view>
 		<view class="config-item">
 			<view>绑定第三方账号</view>
-			<view> > </view>
+			<view class="right-mark"> > </view>
 		</view>
 		<view class="config-item">
 			<view>消息推送</view>
-			<view> > </view>
+			<view class="right-mark"> > </view>
 		</view>
 		<view class="config-item">
 			<view>短信提醒</view>
-			<view> > </view>
+			<view class="right-mark"> > </view>
 		</view>
 		<view class="config-item">
 			<view>图片显示</view>
-			<view> > </view>
+			<view class="right-mark"> > </view>
 		</view>
 		<view class="config-item">
 			<view>清除缓存</view>
-			<view> > </view>
+			<view class="right-mark"> > </view>
 		</view>
 		<view class="my-exit">退出</view>
 	</view>
@@ -44,7 +44,11 @@
 			}
 		},
 		methods: {
-			
+			goAddressList(){
+				uni.navigateTo({
+					url:"/pages/address-list/address-list"
+				})
+			}
 		}
 	}
 </script>
@@ -54,7 +58,7 @@
 	
 }
 .config-item {
-	font-display: flex;
+	display: flex;
 	padding: 20rpx 0 20rpx 20rpx;
 	justify-content: space-between;
 	border-bottom: 2rpx solid #cccccc;
@@ -65,5 +69,10 @@
 	height: 80rpx;
 	color: #ffffff;
 	text-align: center;
+	font-size: 32rpx;
+	align-items: center;
+}
+.right-mark {
+	padding-right: 10rpx;
 }
 </style>

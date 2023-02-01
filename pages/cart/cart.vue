@@ -55,7 +55,7 @@
 				<view class="foot-total">
 					<template v-if="isEditing">
 						<view class="foot-count ">合计：<text class="f-active-color">¥{{totalCount.price}}</text></view>
-						<view class="foot-num">结算：（{{totalCount.num}}）</view>
+						<view class="foot-num" @tap="goConfirm">结算：（{{totalCount.num}}）</view>
 					</template>	
 					<template v-else>
 						<view class="foot-num" style="background-color: black;">移入收藏夹</view>
@@ -114,6 +114,11 @@
 			},
 			changeNum(event, index){
 				this.dataList[index].num = event;
+			},
+			goConfirm(){
+				uni.navigateTo({
+					url:"/pages/confirm-order/confirm-order"
+				})
 			}
 		}
 	}
