@@ -228,7 +228,9 @@
                 "enablePullDownRefresh": false,
 				"app-plus": {
 					"scrollIndicator": "none",
-					"titleNView": false
+					"titleNView": {
+						"autoBackButton": false
+					}
 				}
             }
             
@@ -239,6 +241,22 @@
             {
                 "navigationBarTitleText": "支付成功",
                 "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/login/login",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView":{
+						"autoBackButton": false
+					},
+					"scrollIndicator": "none"
+				
+				}
             }
             
         }
