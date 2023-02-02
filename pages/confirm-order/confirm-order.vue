@@ -55,7 +55,7 @@
 		<!-- 提交订单 -->
 		<view class="shop-foot">
 			<view class="foot-count ">合计：<text class="f-active-color">¥ 29.99</text></view>
-			<view class="foot-num" >提交订单</view>
+			<view class="foot-num" @tap="goPay">提交订单</view>
 		</view>
 	</view>
 </template>
@@ -93,6 +93,11 @@
 			goAddress(){
 				uni.navigateTo({
 					url:`/pages/address-list/address-list?type=select`
+				})
+			},
+			goPay(){
+				uni.navigateTo({
+					url:"/pages/pay/pay"
 				})
 			}
 		}

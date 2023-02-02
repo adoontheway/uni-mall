@@ -220,6 +220,28 @@
             }
             
         }
+        ,{
+            "path" : "pages/pay/pay",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": false
+				}
+            }
+            
+        }
+        ,{
+            "path" : "pages/pay-success/pay-success",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "支付成功",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -53,7 +53,7 @@
 				</view>
 					
 				<view class="foot-total">
-					<template v-if="isEditing">
+					<template v-if="!isEditing">
 						<view class="foot-count ">合计：<text class="f-active-color">¥{{totalCount.price}}</text></view>
 						<view class="foot-num" @tap="goConfirm">结算：（{{totalCount.num}}）</view>
 					</template>	
