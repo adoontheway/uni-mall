@@ -18,6 +18,9 @@ export default {
 		options.header = options.header || this.common.header;
 		options.method = options.method || this.common.method;
 		options.dataType = options.dataType || this.common.dataType;
+		setTimeout(()=>{
+			uni.hideLoading();
+		},2000);
 		return new Promise((res, rej)=>{
 			uni.request({
 				...options,
@@ -29,7 +32,7 @@ export default {
 					res(data);
 				},
 				complete:()=>{
-					uni.hideLoading();
+					
 				}
 			})
 		});

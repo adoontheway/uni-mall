@@ -5,13 +5,13 @@
 				<scroll-view>
 					<view class="login-tel">
 						<view class="tel-main">
-							<view class="close">
+							<view class="close" @tap="goBack">
 								<image class="close-img" src="../../static/img/close.png"></image>
 							</view>
 							<view class="logo">
 								<image class="logo-img" src="../../static/logo.png"></image>
 							</view>	
-							<view class="tel">
+							<view class="tel" @tap="goRegister">
 								手机号注册
 							</view>
 							<OtherLogin></OtherLogin>
@@ -27,7 +27,7 @@
 				<scroll-view>
 					<view class="login-tel">
 						<view class="tel-main">
-							<view class="close close-content">
+							<view class="close close-content"  @tap="goBack">
 								<view>
 									<image class="close-img" src="../../static/img/close.png"></image>
 								</view>
@@ -40,17 +40,17 @@
 							</view>
 							<view class="login-form">
 								<view class="login-user">
-									<text class="form-label">账号</text><input type="text" placeholder="请输入手机号逆臣"/>
+									<text class="form-label">账号</text><input v-model='username' type="text" placeholder="请输入手机号昵称"/>
 								</view>
 								<view class="login-user">
-									<text class="form-label">密码</text><input type="safe-password" placeholder="6-16为字符"/>
+									<text class="form-label">密码</text><input v-model='userpwd' type="safe-password" placeholder="6-16为字符"/>
 								</view>
 							</view>
 							<view class="login-quick">
 								<view>忘记密码</view>
 								<view>免密登陆?</view>
 							</view>
-							<view class="tel">
+							<view class="tel" @tap="submit">
 								登陆
 							</view>
 							<view class="remind">
@@ -73,14 +73,49 @@
 	export default {
 		data() {
 			return {
-				
+				username:"",
+				userpwd:"",
+				rules:{
+					username:{
+						rule:/\S/,
+						msg:"用户名账号不能为空"
+					},
+					userpwd:{
+						rule:/^[0-9a-zA-Z]{6,16}$/,
+						msg:"密码应该是6-16为字符"
+					}
+				}
 			}
 		},
 		components:{
 			OtherLogin,
 		},
 		methods: {
-			
+			goBack(){
+				uni.navigateBack();
+			},
+			submit(){
+				if(this.validate('username') && this.validate('userpwd')){
+					// todo 登陆
+					this.goBack();
+				}
+			},
+			//判断验证是否复合要求
+			validate(key){
+				if(!this.rules[key].rule.test(this[key])){
+					uni.showToast({
+						title:this.rules[key].msg,
+						icon:"none"
+					});
+					return false
+				}
+				return true;
+			},
+			goRegister(){
+				uni.navigateTo({
+					url:"/pages/phone-register/phone-register"
+				})
+			}
 		}
 	}
 </script>
