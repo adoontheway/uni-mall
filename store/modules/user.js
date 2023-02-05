@@ -20,7 +20,7 @@ export default {
 				userInfo = JSON.parse(userInfo);
 				state.userInfo = userInfo;
 				state.loginStatus = true;
-				state.token = userInfo.token;
+				state.token = userInfo.token;// 根据jwt机制，检查是否过时
 			}
 		},
 		//登陆了后保存用户信息

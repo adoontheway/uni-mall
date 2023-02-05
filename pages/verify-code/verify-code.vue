@@ -25,8 +25,9 @@
 </template>
 
 <script>
-	
+	import $http from "@/common/api/request.js";
 	import NewLine from '@/components/NewLine.vue';
+	import {mapMutations} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -37,7 +38,7 @@
 				// 发送的手机号码
 				tel:"",
 				// 倒计时时间
-				time:10,
+				time:60,
 				// 按钮是否disable
 				disabled:false,
 			} 
@@ -45,16 +46,44 @@
 		components:{
 			NewLine
 		},
-		onReady(e){
+		onLoad(e){
 			// this.tel = e.tel;
+		},
+		onReady(e){
 			this.sendCode();
 		},
 		methods: {
+			...mapMutations(['login']),
 			submit(){
 				//todo 需要向后端发起请求
-				uni.switchTab({
-					url:"/pages/index/index"
-				})
+				$http.request({
+					url:"/verify_code",
+					methods:'post',
+					data:{
+						tel:this.code,
+					}
+				}).then((res)=>{
+					console.log(JSON.stringify(res));
+					if(res.code === 0){
+						this.login(res.data);
+						uni.switchTab({
+							url:"/pages/index/index"
+						})
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:"none"
+						})
+					}
+						
+				}).catch((e)=>{
+					console.log("bad request",e);
+					uni.showToast({
+						title:"请求失败",
+						icon:"none"
+					})
+				});
+				
 			},
 			sendCode(){
 				this.disabled = true;
@@ -66,7 +95,7 @@
 						clearInterval(timer);
 						this.codeMsg = `重新发送`;
 						this.disabled = false;
-						this.time = 10;
+						this.time = 60;
 					}
 				},1000);
 			}

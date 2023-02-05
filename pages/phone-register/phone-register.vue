@@ -18,6 +18,7 @@
 </template>
 
 <script>
+	import $http from "@/common/api/request.js";
 	import NewLine from '@/components/NewLine.vue';
 	export default {
 		data() {
@@ -37,9 +38,33 @@
 		methods: {
 			submit(){
 				if(this.validate('phoneno')){
-					uni.navigateTo({
-						url:`/pages/verify-code/verify-code?tel=${this.phoneno}`
-					})
+					$http.request({
+						url:"/register",
+						methods:'post',
+						data:{
+							tel:this.phoneno,
+						}
+					}).then((res)=>{
+						console.log(JSON.stringify(res));
+						if(res.code === 0){
+							uni.navigateTo({
+								url:`/pages/verify-code/verify-code?tel=${this.phoneno}`
+							})
+						}else{
+							uni.showToast({
+								title:res.msg,
+								icon:"none"
+							})
+						}
+							
+					}).catch((e)=>{
+						console.log("bad request",e);
+						uni.showToast({
+							title:"请求失败",
+							icon:"none"
+						})
+					});
+					
 				}
 			},
 			validate(key){

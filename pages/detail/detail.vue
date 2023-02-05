@@ -147,7 +147,6 @@
 		},
 		onLoad(e) {
 			this.getData(e.id);
-			console.log(getCurrentPages());
 		},
 		//todo 这里需要做一个分享界面来分享到不同平台
 		onNavigationBarButtonTap(e) {

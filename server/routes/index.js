@@ -28,8 +28,35 @@ router.post("/api/login", function(req, res, next) {
 			token:'12312dfsd'
 		}
 	})
-})
+});
 
+router.post("/api/register", function(req, res, next) {
+	// todo:插入手机号以及验证码
+	res.json({
+		code:0,
+	});
+	
+	// res.json({
+	// 	code:1,
+	// 	msg:'手机号已存在'
+	// })
+});
+// 请求验证码
+router.post("/api/code", function(req, res, next) {
+	// todo: 生成验证码存放到缓存，接入短信sdk
+	res.json({
+		code:0,
+	});
+});
+// 发送验证码
+router.post("/api/verify_code", function(req, res, next) {
+	let code = req.body.code;
+	res.json({
+		code:0,
+	});
+	// 注册流程
+	// 返回用户信息
+});
 router.get("/api/goods/id", function(req, res, next){
 	res.json({
 		code:0,

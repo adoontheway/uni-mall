@@ -6,7 +6,7 @@
 				<view class="header-config" @tap="goConfig">
 					<image class="config-img" src="../../static/img/config.png"></image>
 				</view>
-				<view class="header-logo" @tap="goLogin">
+				<view class="header-logo" > <!-- @tap="goLogin"> -->
 					<image class="logo-img" :src="loginStatus ? userInfo.avatar:'../../static/img/16.png'"></image>
 					<view class="logo-name">
 						{{loginStatus ?　userInfo.nickname : '用户昵称'}}
@@ -105,11 +105,11 @@
 					url:"/pages/my-orders/my-orders"
 				})
 			},
-			goLogin(){
-				uni.navigateTo({
-					url:'/pages/login/login'
-				})
-			}
+			// goLogin(){
+			// 	uni.navigateTo({
+			// 		url:'/pages/login/login'
+			// 	})
+			// }
 		}
 	}
 </script>
