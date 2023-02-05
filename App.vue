@@ -1,12 +1,16 @@
 <script>
+	import routingIntercept from '@/utils/permission.js';
 	export default {
 		onLaunch: function() {
-			console.log('App Launch')
+			console.log('App Launch');
+			this.$store.commit('initUser');
+			
+			routingIntercept();
 		},
 		onShow: function() {
 			console.log('App Show')
 		},
-		onHide: function() {
+		onHide: function() { 
 			console.log('App Hide')
 		}
 	}

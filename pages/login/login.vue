@@ -69,7 +69,9 @@
 </template>
 
 <script>
+	import $http from "@/common/api/request.js";
 	import OtherLogin from '../../components/login-other.vue';
+	import {mapMutations} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -91,6 +93,7 @@
 			OtherLogin,
 		},
 		methods: {
+			...mapMutations(['login']),
 			goBack(){
 				uni.navigateBack();
 			},
@@ -99,6 +102,30 @@
 					// todo 登陆
 					this.goBack();
 				}
+				
+				$http.request({
+					url:"/login",
+					methods:'post',
+					data:{
+						userName:this.username,
+						userPwd:this.userpwd
+					}
+				}).then((res)=>{
+					console.log(JSON.stringify(res));
+					if(res.code === 0)
+						this.login(res.data);
+					else
+						uni.showToast({
+							title:res.errMsg,
+							icon:"none"
+						})
+				}).catch((e)=>{
+					console.log("bad request",e);
+					uni.showToast({
+						title:"请求失败",
+						icon:"none"
+					})
+				});
 			},
 			//判断验证是否复合要求
 			validate(key){

@@ -13,6 +13,23 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.post("/api/login", function(req, res, next) {
+	let params = {
+		userName:req.body.userName,
+		userPwd : req.body.userPwd
+	}
+	res.json({
+		code:0,
+		data:{
+			id:1,
+			nickname:'张三',
+			phone:'13500000000',
+			avatar:'../../static/img/16.png',
+			token:'12312dfsd'
+		}
+	})
+})
+
 router.get("/api/goods/id", function(req, res, next){
 	res.json({
 		code:0,

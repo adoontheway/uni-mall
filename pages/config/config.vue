@@ -32,11 +32,12 @@
 			<view>清除缓存</view>
 			<view class="right-mark"> > </view>
 		</view>
-		<view class="my-exit">退出</view>
+		<view class="my-exit" @tap="quit">退出登录</view>
 	</view>
 </template>
 
 <script>
+	import {mapMutations} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -44,9 +45,20 @@
 			}
 		},
 		methods: {
+			...mapMutations(['logout']),
 			goAddressList(){
 				uni.navigateTo({
 					url:"/pages/address-list/address-list"
+				})
+			},
+			quit(){
+				this.logout();
+				uni.showToast({
+					title:"退出成功",
+					icon:"none"
+				})
+				uni.switchTab({
+					url:"/pages/index/index"
 				})
 			}
 		}
