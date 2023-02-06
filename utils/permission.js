@@ -5,7 +5,8 @@ const whiteList = [
 	"/pages/login/login",
 	"//pages/logout/logout",
 	{pattern: /^\/pages\/list.*/},
-	'/pages/my/my'
+	'/pages/my/my',
+	'"pages/phone-register/phone-register"'
 ];
 
 export default async function (){

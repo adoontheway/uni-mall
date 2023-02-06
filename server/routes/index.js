@@ -30,6 +30,13 @@ router.post("/api/login", function(req, res, next) {
 	})
 });
 
+router.post("/api/loginother", function(req, res, next) {
+	let provider = req.body.provider;
+	let openid  = req.body.openid;
+	let nickname  = req.body.nickname;
+	let imgUrl  = req.body.imgUrl;
+});
+
 router.post("/api/register", function(req, res, next) {
 	// todo:插入手机号以及验证码
 	res.json({

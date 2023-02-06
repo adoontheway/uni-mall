@@ -40,6 +40,7 @@
 </template>
 
 <script>
+	import $http from "@/common/api/request.js";
 	import mpvueCityPicker from "@/components/uni/mpvue-citypicker/mpvueCityPicker.vue";
 	import {mapActions,mapState} from "vuex";
 	export default {

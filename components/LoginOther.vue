@@ -80,7 +80,7 @@
 								//qq
 								// {
 								// 	errMsg:''.
-								// 	userInfo:{
+								// 	userInfo:{·
 								// 		openId:'',
 								// 		nickName:'',
 								// 		gender:'',
@@ -91,6 +91,14 @@
 								// 		headimgurl:'',
 								// 		unionId:''
 								// 	}
+								// }
+								
+								// todo 需要给服务端传递用于生成账号的值
+								// {
+									// provider,
+									// openid,
+									// nickname,
+									// imgUrl
 								// }
 							}
 						})

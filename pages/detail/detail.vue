@@ -216,7 +216,6 @@
 				}).then((res)=>{
 					this.goodsInfo = res;
 				}).catch((e)=>{
-					console.log("bad request",e);
 					uni.showToast({
 						title:"请求失败",
 						icon:"none"
