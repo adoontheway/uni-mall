@@ -8,26 +8,28 @@
 			@clickLeft="onLeftClick"
 		></uniNavBar>
 		<view class="pay-main">
-			<label>
-				<view class="pay-item">
-					<image class="pay-icon" src="../../static/img/pay-zfb.png"></image>
-					<view>
-						<view>支付宝支付</view>
-						<view class="f-color">推荐支付宝用户使用</view>
+			<radio-group>
+				<label>
+					<view class="pay-item">
+						<image class="pay-icon" src="../../static/img/pay-zfb.png"></image>
+						<view>
+							<view>支付宝支付</view>
+							<view class="f-color">推荐支付宝用户使用</view>
+						</view>
+						<radio></radio>
 					</view>
-					<radio></radio>
-				</view>
-			</label>
-			<label>
-				<view class="pay-item">
-					<image class="pay-icon" src="../../static/img/pay-wx.png"></image>
-					<view>
-						<view>微信支付</view>
-						<view class="f-color">推荐有微信账号的用户使用</view>
+				</label>
+				<label>
+					<view class="pay-item">
+						<image class="pay-icon" src="../../static/img/pay-wx.png"></image>
+						<view>
+							<view>微信支付</view>
+							<view class="f-color">推荐有微信账号的用户使用</view>
+						</view>
+						<radio></radio>
 					</view>
-					<radio></radio>
-				</view>
-			</label>
+				</label>
+			</radio-group>
 		</view>
 		
 		<view class="pay-foot">
@@ -53,8 +55,19 @@
 				uni.navigateBack();
 			},
 			goCallPay(){
+				uni.requestPayment({
+					provider:"alipay",
+					orderInfo:{
+						
+					},
+					success:(res)=> {
+						console.log(res);
+					},
+					fail:()=> {
+						
+					}
+				})
 				//todo 吊起支付app
-				console.log("why?");
 				uni.navigateTo({
 					url:'/pages/pay-success/pay-success'
 				})

@@ -56,6 +56,7 @@
 <script>
 	import NewLine from "@/components/NewLine.vue";
 	import $http from "@/common/api/request.js";
+	import API from "@/utils/api.js";
 	export default {
 		data() {
 			return {
@@ -87,7 +88,7 @@
 		methods: {
 			getData(){
 				$http.request({
-						url:`/goods/list`
+						url:API.GOODS.LIST
 					}).then((res)=>{
 						// console.log(JSON.stringify(res));
 						this.dataList = res;

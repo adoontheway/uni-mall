@@ -15,28 +15,27 @@
 					class="shop-item"
 					v-for="(item,index) in dataList"
 					:key="index"
-								
+					@tap="selectItem(index)"			
 				>
-					<radio 
-						:checked="item.checked" 
-						@tap="selectItem(index)"
-					>
-						
-					</radio>
-					<image class="shop-img" :src="item.imgUrl"></image>
-					<view class="shop-desc">
-						<view class="shop-name">{{item.name}}</view>
-						<view class="shop-color f-color">{{item.desc}}</view>
-						<view class="shop-price">
-							<view>{{item.price}}</view>
-							<template v-if="!isEditing">
-								<view>*{{item.num}}</view>
-							</template>
-							<template v-else>
-								<NumberBox :min="1" :value="item.num" @change="changeNum($event, index)"></NumberBox>
-							</template>
+						<radio
+							:checked="item.checked" 
+						>
+						</radio>
+						<image class="shop-img" :src="item.imgUrl"></image>
+						<view class="shop-desc">
+							<view class="shop-name">{{item.name}}</view>
+							<view class="shop-color f-color">{{item.desc}}</view>
+							<view class="shop-price">
+								<view>{{item.price}}</view>
+								<template v-if="!isEditing">
+									<view>*{{item.num}}</view>
+								</template>
+								<template v-else>
+									<NumberBox :min="1" :value="item.num" @change="changeNum($event, index)"></NumberBox>
+								</template>
+							</view>
 						</view>
-					</view>
+					
 				</view>
 				
 			</view>
@@ -58,7 +57,10 @@
 						<view class="foot-num" @tap="goConfirm">结算：（{{totalCount.num}}）</view>
 					</template>	
 					<template v-else>
-						<view class="foot-num" style="background-color: black;">移入收藏夹</view>
+						<view 
+							class="foot-num" 
+							style="background-color: black;" 
+							@tap="addCollect(item.id)">移入收藏夹</view>
 						<view class="foot-num" @tap="delGoods()">删除</view>
 					</template>
 				</view>
@@ -81,9 +83,11 @@
 </template>
 
 <script>
+	import $http from "@/common/api/request.js";
+	import API from "@/utils/api.js"
 	import uniNavBar from "@/components/uni/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue";
 	import NumberBox from "@/components/uni/uni-number-box/components/uni-number-box/uni-number-box.vue";
-	import {mapState,mapActions,mapGetters,mapMutations} from "vuex";
+	import {mapState,mapActions,mapMutations,mapGetters} from "vuex";
 	export default {
 		data() {
 			return {
@@ -96,7 +100,9 @@
 		},
 		computed:{
 			...mapState({
-				dataList:state=>state.cart.dataList
+				dataList:state=>state.cart.dataList,
+				selectedList: state => state.cart.selectList,
+				orderList:state=>state.order.dataList,
 			}),
 			...mapGetters([
 				'checkedAll',
@@ -116,9 +122,45 @@
 				this.dataList[index].num = event;
 			},
 			goConfirm(){
-				uni.navigateTo({
-					url:"/pages/confirm-order/confirm-order"
-				})
+				if(this.selectedList.length === 0){
+					uni.showToast({
+						title:"请至少选择一件商品",
+						icon:"none"
+					});
+				}else{
+					let arr = [];
+					this.selectedItemList.forEach((item)=>{
+						arr.push({
+							id:item.id,
+							num:item.num,
+							attrs:item.attrs
+						})
+					});
+					// 生成订单
+					$http.request({
+						url:API.ORDER.ADD,
+						data:arr,
+						method:'POST',
+					}).then((res)=>{
+						this.orderList.push(res);
+						// todo 将返回的订单存放到订单的store中
+						uni.navigateTo({
+							url:"/pages/confirm-order/confirm-order?orderId="+res.id
+						})
+					}).catch((e)=>{
+						uni.showToast({
+							title:"添加订单失败",
+							icon:"none"
+						})
+					});
+					uni.navigateTo({
+						url:"/pages/confirm-order/confirm-order?orderId="+res.id
+					})
+				}
+				
+			},
+			addCollect(itemId){
+				//todo 添加收藏夹
 			}
 		}
 	}

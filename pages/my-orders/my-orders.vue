@@ -6,7 +6,7 @@
 			<view 
 				class="header-item"
 				:class="index == curTabIndex ? 'header-item-active' : ''"
-				v-for="(item, index) in tabList"
+				v-for="(item, index) in dataList"
 				@tap="selectTab(index)"
 				:key="index"
 			>
@@ -15,7 +15,7 @@
 		</view>
 		
 		<block 
-			v-for="(v,k) in tabList"
+			v-for="(v,k) in dataList"
 			:key="k"
 		>
 			<view
@@ -76,10 +76,6 @@
 						<view class="go-index" @tap="goIndex">去首页逛逛</view>
 					</view>
 				</scroll-view>
-				
-				
-				
-					
 			</view>
 		</block>
 		
@@ -88,58 +84,20 @@
 
 <script>
 	import NewLine from '@/components/NewLine.vue';
+	import { mapMutations,mapState } from "vuex";
 	export default {
 		data() {
 			return {
 				curTabIndex:0,
-				tabList:[
-					{
-						name:'全部',
-						list:[
-							{
-								status:"待付款",
-								totalPrice:3999.00,
-								goods_item:[
-									{
-										name:"做点办公室椅垫3D网眼透气防滑竹炭垫学生餐椅汽车垫夏天防汗",
-										imgUrl:'../../static/img/14.jpeg',
-										attrs:"颜色分类：竹炭做点黑色 尺寸：45*45cm",
-										pprice:299.00,
-										num:1,
-									}
-								]
-							}
-						]
-					},
-					{
-						name:'待付款',
-						list:[
-							
-						]
-					},
-					{
-						name:'待发货',
-						list:[
-							
-						]
-					},
-					{
-						name:'待收获',
-						list:[
-							
-						]
-					},
-					{
-						name:'待评价',
-						list:[
-							
-						]
-					}
-				],
-				orderList:[
-					
-				]
 			}
+		},
+		onShow() {
+			this.initOrderFn();
+		},
+		computed : {
+			...mapState({
+				dataList:state=>state.order.dataList,
+			}),
 		},
 		onLoad(){
 			//测试角标
@@ -152,6 +110,7 @@
 			NewLine
 		},
 		methods: {
+			...mapMutations(['initOrderFn']),
 			selectTab(index){
 				this.curTabIndex = index;
 			},

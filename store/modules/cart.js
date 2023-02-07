@@ -1,22 +1,25 @@
+import $http from "@/common/api/request.js";
+import API from "@/utils/api.js";
+
 export default {
 	state:{
 		dataList:[
 			{
 				checked:false,
-				id:1,
+				id:10000,
 				name:"Redmi Note 11 5G 天玑810 33W Pro快充 5000mAh大电池 6GB +128GB 神秘黑境 智能手机 小米 红米",
 				desc:"颜色：魅惑紫",
 				imgUrl:'../../static/img/2.png',
-				price:199.00,
+				price:11.00,
 				num:5,
 			},
 			{
 				checked:false,
-				id:1,
+				id:20000,
 				name:"Redmi Note 11 5G 天玑810 33W Pro快充 5000mAh大电池 6GB +128GB 神秘黑境 智能手机 小米 红米",
 				desc:"颜色：海天蓝",
 				imgUrl:'../../static/img/item0.jpeg',
-				price:199.00,
+				price:100.00,
 				num:2,
 			},
 		],
@@ -41,6 +44,11 @@ export default {
 			total.num = state.selectList.length;
 			return total;
 		},
+		selectedItemList(state){
+			return state.dataList.filter((item,index)=>{
+				return state.selectList.indexOf(item.id) != -1;
+			})
+		}
 	},
 	mutations:{
 		//全选方法
@@ -59,26 +67,57 @@ export default {
 		},
 		// 单选
 		selectItem(state, index){
-			let id = state.list[index].id;
+			let id = state.dataList[index].id;
 			let i = state.selectList.indexOf(id);
 			// 如果已经选中
 			if(i > -1){
-				state.list[index].checked = false;
-				return state.selectList.splice(index, 1);
+				state.dataList[index].checked = false;
+				return state.selectList.splice(i, 1);
 			}else{
-				state.list[index].checked = true;
+				state.dataList[index].checked = true;
 				state.selectList.push(id);
 			}
 		},
 		delGood(state){
-			state.list = state.list.filter(v=>{
-				return state.selectList.indexOf(v.id) === -1;
-			});
-			state.selectList = [];
+			uni.showModal({
+				content:"确定要从购物车移除吗?",
+				success:()=> {
+					$http.request({
+						url:API.CART.DEL,
+						data:state.selectList,
+						method:'POST',
+					}).then((res)=>{
+						state.dataList = state.dataList.filter(v=>{
+							return state.selectList.indexOf(v.id) === -1;
+						});
+						state.selectList = [];
+					}).catch((e)=>{
+						uni.showToast({
+							title:"从购物车移除失败",
+							icon:"none"
+						})
+					});
+				}
+			})
+			
 		},
 		addGood(state, goodInfo){
-			state.list.push(goodInfo);
-		}
+			$http.request({
+				url:API.CART.ADD,
+				data:{
+					id:goodInfo.id,
+					num:goodInfo.num
+				},
+				method:'POST',
+			}).then((res)=>{
+				state.dataList.push(goodInfo);
+			}).catch((e)=>{
+				uni.showToast({
+					title:"添加购物车失败",
+					icon:"none"
+				})
+			});
+		},
 	},
 	actions:{
 		checkAll({commit, getters}){

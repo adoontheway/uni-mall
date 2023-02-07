@@ -79,6 +79,7 @@
 
 <script>
 	import $http from "@/common/api/request.js";
+	import API from "@/utils/api.js";
 	import NumberBox from "@/components/uni/uni-number-box/components/uni-number-box/uni-number-box.vue";
 	import Card from "@/components/Card.vue";
 	import CommodityList from "@/components/CommodityList.vue";
@@ -212,7 +213,7 @@
 			},
 			getData(id){
 				$http.request({
-					url:"/godds/id?id="+id,
+					url:API.GOODS.INFO+"?id="+id,
 				}).then((res)=>{
 					this.goodsInfo = res;
 				}).catch((e)=>{
@@ -231,14 +232,39 @@
 				})
 			},
 			addCart(){
-				this.goodsInfo['checked'] = false;
-				this.goodsInfo['num'] = this.num; 
-				this.addGood(this.goodsInfo);
-				this.hidePop();
-				uni.showToast({
-					title:'加入购物车成功',
-					icon:'none'
-				})
+				$http.request({
+					url:API.CART.ADD,
+					data:{
+						//id
+						id: this.goodsInfo.id,
+						// 数量
+						num: this.num,
+						// 规格
+						attr:{
+							
+						}
+					},
+					method:'POST',
+				}).then((res)=>{
+					this.addGood(res);
+					uni.showToast({
+						title:'加入购物车成功',
+						icon:'none'
+					})
+				}).catch((e)=>{
+					uni.showToast({
+						title:"请求失败",
+						icon:"none"
+					})
+				});
+				// this.goodsInfo['checked'] = false;
+				// this.goodsInfo['num'] = this.num; 
+				// this.addGood(this.goodsInfo);
+				// this.hidePop();
+				// uni.showToast({
+				// 	title:'加入购物车成功',
+				// 	icon:'none'
+				// })
 			}
 		}
 	}

@@ -30,6 +30,7 @@
 
 <script>
 	import $http from "@/common/api/request.js";
+	import API from "@/utils/api.js";
 	import NewLine from "@/components/NewLine.vue";
 	import CommodityList from "./CommodityList.vue"
 	export default {
@@ -84,7 +85,7 @@
 		getData(){
 			//todo 需要分页
 			$http.request({
-				url:`/goods/search?name=${this.keyword}
+				url:API.GOODS.SEARCH+`?name=${this.keyword}
 				&${this.shopList.data[this.curIndex].key}=${this.shopList.data[this.curIndex].status == 1 ? 'asc':'desc'}`,
 				// data:{
 				// 	...this.orderBy

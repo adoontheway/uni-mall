@@ -70,6 +70,7 @@
 
 <script>
 	import $http from "@/common/api/request.js";
+	import API from "@/utils/api.js";
 	import OtherLogin from '../../components/LoginOther.vue';
 	import {mapMutations} from 'vuex';
 	export default {
@@ -104,7 +105,7 @@
 				}
 				
 				$http.request({
-					url:"/login",
+					url:API.USER.LOGIN,
 					methods:'POST',
 					data:{
 						userName:this.username,

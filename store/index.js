@@ -5,11 +5,13 @@ Vue.use(Vuex);
 import cart from "./modules/cart.js";
 import address from "./modules/address.js";
 import user from "./modules/user.js";
+import order from "./modules/order.js";
 
 export default new Vuex.Store({
 	modules:{
 		cart,
 		address,
-		user
+		user,
+		order
 	}
 });

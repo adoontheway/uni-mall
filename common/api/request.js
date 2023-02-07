@@ -51,5 +51,9 @@ export default {
 				}
 			})
 		});
+	},
+	// 登录或者初始化的时候调用此方法在请求头中加入token
+	addToken(token){
+		this.common.header['authorization'] = token;
 	}
 }

@@ -19,6 +19,7 @@
 
 <script>
 	import $http from "@/common/api/request.js";
+	import API from "@/utils/api.js";
 	import NewLine from '@/components/NewLine.vue';
 	export default {
 		data() {
@@ -39,8 +40,8 @@
 			submit(){
 				if(this.validate('phoneno')){
 					$http.request({
-						url:"/register",
-						methods:'post',
+						url:API.USER.REGISTER,
+						methods:'POST',
 						data:{
 							tel:this.phoneno,
 						}
@@ -58,7 +59,6 @@
 						}
 							
 					}).catch((e)=>{
-						console.log("bad request",e);
 						uni.showToast({
 							title:"请求失败",
 							icon:"none"

@@ -5,7 +5,7 @@
 				class="address-item"
 				v-for="(item, index) in list"
 				:key="index"
-				@tap="goNewAddress(index)"
+				@tap="selectItem(index)"
 			>
 				<view class="item-parts">
 					<view>{{item.name}}</view>
@@ -17,7 +17,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="new-address" @tap="goNewAddress(-1)">
+		<view class="new-address" @tap="goNewAddress()">
 			<view class="new-address-btn">新增地址</view>
 		</view>
 		
@@ -42,7 +42,7 @@
 			this.type = e.type;
 		},
 		methods: {
-			goNewAddress(index){
+			selectItem(index){
 				// 如果是选择地址
 				if(this.type =="select"){
 					uni.$emit("address-selected",{index:index});
@@ -57,6 +57,11 @@
 				}
 				
 			},
+			goNewAddress(){
+				uni.navigateTo({
+					url:`/pages/new-address/new-address?index=-1`
+				})
+			}
 		}
 	}
 </script>

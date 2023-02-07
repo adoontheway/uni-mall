@@ -1,4 +1,5 @@
 import { setAuthorization,removeAuthorization } from '@/utils/auth.js';
+import $http from "@/common/api/request.js";
 
 export default {
 	state:{
@@ -21,6 +22,7 @@ export default {
 				state.userInfo = userInfo;
 				state.loginStatus = true;
 				state.token = userInfo.token;// 根据jwt机制，检查是否过时
+				$http.addToken(state.token);
 			}
 		},
 		//登陆了后保存用户信息
@@ -29,6 +31,7 @@ export default {
 			state.loginStatus = true;
 			state.token = userInfo.token;
 			setAuthorization(state.token);
+			$http.addToken(state.token);
 			// 持久化
 			uni.setStorageSync('userInfo',JSON.stringify(userInfo));
 		},

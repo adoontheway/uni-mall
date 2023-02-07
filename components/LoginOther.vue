@@ -21,6 +21,8 @@
 </template>
 
 <script>
+	import $http from "@/common/api/request.js";
+	import API from "@/utils/api.js";
 	export default {
 		name:"login-other",
 		data() {
@@ -92,13 +94,37 @@
 								// 		unionId:''
 								// 	}
 								// }
-								
+								$http.request({
+									url:API.USER.LOGIN_3RD,
+									methods:'POST',
+									data:{
+										provider:res.userInfo.provider,
+										openid:res.userInfo.openId,
+										nickname:res.userInfo.nickName,
+										imgUrl:res.userInfo.avatarUrl || res.userInfo.headimgurl
+									}
+								}).then((res)=>{
+									console.log(JSON.stringify(res));
+									if(res.code === 0){
+										uni.navigateTo({
+											url:`/pages/verify-code/verify-code?tel=${this.phoneno}`
+										})
+									}else{
+										uni.showToast({
+											title:res.msg,
+											icon:"none"
+										})
+									}
+										
+								}).catch((e)=>{
+									uni.showToast({
+										title:"请求失败",
+										icon:"none"
+									})
+								});
 								// todo 需要给服务端传递用于生成账号的值
 								// {
-									// provider,
-									// openid,
-									// nickname,
-									// imgUrl
+									
 								// }
 							}
 						})

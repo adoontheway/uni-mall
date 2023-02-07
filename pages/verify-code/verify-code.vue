@@ -26,6 +26,7 @@
 
 <script>
 	import $http from "@/common/api/request.js";
+	import API from "@/utils/api.js";
 	import NewLine from '@/components/NewLine.vue';
 	import {mapMutations} from 'vuex';
 	export default {
@@ -57,8 +58,8 @@
 			submit(){
 				//todo 需要向后端发起请求
 				$http.request({
-					url:"/verify_code",
-					methods:'post',
+					url:API.USER.VERIFY_CODE,
+					methods:'POST',
 					data:{
 						tel:this.code,
 					}

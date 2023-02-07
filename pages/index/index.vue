@@ -86,6 +86,7 @@
 
 <script>
 	import $http from "@/common/api/request.js";
+	import API from "@/utils/api.js";
 	import IndexSwiper from "@/components/IndexSwiper.vue";
 	import Recommand from "@/components/Recommand.vue"
 	import Card from "@/components/Card.vue"
@@ -139,7 +140,7 @@
 		methods: {
 			__init(){
 				$http.request({
-					url:"/index_list/data",
+					url:API.LIST+"/0/0",
 				}).then((res)=>{
 					this.topBar = res.topBar;
 					this.newTopBar = this.initData(res);
@@ -180,7 +181,7 @@
 				let id = this.topBar[index].id;
 				let page = Math.ceil(this.newTopBar[index].data.length/5)+1;
 				$http.request({
-					url:`/index_list/${id}/data/${page}`,
+					url:API.LIST+`/${id}/${page}`,
 				}).then((res)=>{
 					this.newTopBar[index].data = [...this.newTopBar[index].data,...res];
 					if(typeof callback === "function"){

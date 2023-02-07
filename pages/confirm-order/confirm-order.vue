@@ -14,6 +14,7 @@
 				</view>
 				<view class="address-detail">收货地址：{{address.city}} {{address.details}}</view>			
 			</template>
+			<!-- todo: 地址为空的情况逻辑有瑕疵 -->
 			<template v-else>
 				<view class="user-info">
 					<view class="user-name">
@@ -26,51 +27,47 @@
 		
 		<!-- 商品信息 -->
 		<view class="item-list">
-			<view class="item-info" >
-				<image class="item-img" src="../../static/img/14.jpeg"></image>
+			<view 
+				class="item-info"
+				v-for="(item, index) in selectedItemList"
+				:key="index"
+			>
+				<image class="item-img" :src="item.imgUrl"></image>
 				<view class="item-desc">
-					<view class="item-name">座垫办公室椅垫3D网眼透气防滑竹炭垫学生餐椅汽车垫夏天防汗</view>
-					<view class="item-size f-color">颜色分类：竹炭做点黑色 尺寸：45*45cm</view>
+					<view class="item-name">{{item.name}}</view>
+					<view class="item-size f-color">{{item.desc}}</view>
 					<view class="f-active-color" style="font-size: 24rpx;">7天无理由</view>
 				</view>
 				<view class="text-right">
-					<view>¥ 29.99</view>
-					<view class="f-active-color">x 7</view>
+					<view>¥ {{item.price}}</view>
+					<view class="f-active-color">x {{item.num}}</view>
 				</view>
 			</view>
-			<view class="item-info" >
-				<image class="item-img" src="../../static/img/14.jpeg"></image>
-				<view class="item-desc">
-					<view class="item-name">座垫办公室椅垫3D网眼透气防滑竹炭垫学生餐椅汽车垫夏天防汗</view>
-					<view class="item-size f-color">颜色分类：竹炭做点黑色 尺寸：45*45cm</view>
-					<view class="f-active-color" style="font-size: 24rpx;">7天无理由</view>
-				</view>
-				<view class="text-right">
-					<view>¥ 29.99</view>
-					<view class="f-active-color">x 7</view>
-				</view>
-			</view>
+			
 		</view>
 		
 		<!-- 提交订单 -->
 		<view class="shop-foot">
-			<view class="foot-count ">合计：<text class="f-active-color">¥ 29.99</text></view>
+			<view class="foot-count ">合计：<text class="f-active-color">¥ {{totalCount.price}}</text></view>
 			<view class="foot-num" @tap="goPay">提交订单</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import $http from "@/common/api/request.js";
+	import API from "@/utils/api.js";
 	import NewLine from '@/components/NewLine.vue';
 	import { mapGetters, mapState } from "vuex";
 	export default {
 		data() {
 			return {
 				address:null,
+				orderId:""
 			}
 		},
 		computed:{
-			...mapGetters(['defaultAddress']),
+			...mapGetters(['defaultAddress','selectedItemList','totalCount']),
 			...mapState({
 				list:state=>state.address.list
 			})
@@ -78,7 +75,8 @@
 		components:{
 			NewLine
 		},
-		onLoad() {
+		onLoad(e) {
+			this.orderId = e.orderId;
 			if(this.defaultAddress.length>0){
 				this.address= this.defaultAddress[0];
 			}
@@ -96,9 +94,34 @@
 				})
 			},
 			goPay(){
-				uni.navigateTo({
-					url:"/pages/pay/pay"
-				})
+				if( !this.address){
+					uni.showToast({
+						title:"请选择收获地址",
+						icon:"none"
+					})
+				}else{
+					$http.request({
+						url:API.ORDER.SUBMIT,
+						method:'POST',
+						data:{
+							orderId: this.orderId
+						}
+					}).then((res)=>{
+						uni.navigateTo({
+							url:`/pages/pay/pay?orderId=${res.id}`
+						})
+					}).catch((e)=>{
+						uni.showToast({
+							title:"获取订单列表失败",
+							icon:"none"
+						})
+					});
+					
+					uni.navigateTo({
+						url:`/pages/pay/pay?orderId=${res.id}`
+					});
+				}
+				
 			}
 		}
 	}
