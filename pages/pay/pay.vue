@@ -40,6 +40,8 @@
 </template>
 
 <script>
+	import $http from "@/common/api/request.js";
+	import API from "@/utils/api.js";
 	import uniNavBar from "@/components/uni/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue";
 	export default {
 		data() {
@@ -55,18 +57,32 @@
 				uni.navigateBack();
 			},
 			goCallPay(){
-				uni.requestPayment({
-					provider:"alipay",
-					orderInfo:{
-						
-					},
-					success:(res)=> {
-						console.log(res);
-					},
-					fail:()=> {
-						
+				//  服务端接通支付宝沙箱
+				$http.request({
+					url:API.ORDER.PAY,
+					method:'POST',
+					data:{
+						orderId: this.orderId
 					}
-				})
+				}).then((res)=>{
+					// 这个是服务端支付成功的返回url,应该需要传入默认值，并检查是否支付成功
+					plus.runtime.openURL(res.paymentUrl);
+				}).catch((e)=>{
+					uni.showToast({
+						title:"获取订单列表失败",
+						icon:"none"
+					})
+				});
+				// uni.requestPayment({
+				// 	provider:"alipay",
+				// 	orderInfo:,
+				// 	success:(res)=> {
+				// 		console.log(res);
+				// 	},
+				// 	fail:()=> {
+						
+				// 	}
+				// })
 				//todo 吊起支付app
 				uni.navigateTo({
 					url:'/pages/pay-success/pay-success'
