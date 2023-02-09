@@ -1,5 +1,8 @@
 # uni-mall 便利店
 
+## 文档
+* [Vue](https://cn.vuejs.org/guide/essentials/template-syntax.html)
+* [Vuex](https://vuex.vuejs.org/zh/guide/state.html)
 
 ## 用户名，手机号，第三方登录之间的关系
 * 手机号必须要有,没有的话需要提醒绑定
