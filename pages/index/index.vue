@@ -26,27 +26,38 @@
 				:style="'height:'+contentHeight+'px'"
 			>
 				<swiper-item
-					v-for="(item, index) in newTopBar"
+					v-for=" index in topBar.length"
+					
 					:key="index"
 				>
+				
 					<scroll-view 
 						scroll-y="true" 
 						:style="'height:'+contentHeight+'px'"
 						@scrolltolower="loadMore(index)"
 					>
-						<block v-if="item.data.length > 0">
+					
+						<block v-if="Object.keys(content).length !== 0">
+						<!-- <block v-if="item.data.length > 0"> -->
 						
-							<block v-for="(v,k) in item.data" :key="k">
+							<!-- <block v-for="(v,k) in item.data" :key="k"> -->
 								<!-- 推荐模版-->
 								<!-- {{v}} -->
-								<IndexSwiper v-if="v.type === 'swiperList'" :dataList="v.data"></IndexSwiper>
-								<template v-if="v.type === 'recommendList'">
+								
+								<IndexSwiper v-if="'advertiseList' in content " :dataList="content['advertiseList']"></IndexSwiper>
+								<!-- <IndexSwiper v-if="v.type === 'swiperList'" :dataList="v.data"></IndexSwiper> -->
+								<!-- <template v-if="v.type === 'recommendList'">
 									<Recommand  :dataList="v.data"></Recommand>
 									<Card cardTitle="猜你喜欢"></Card>
-								</template>
+								</template> -->
 								
+								
+								<template v-if="'brandList' in content">
+									<Icons  :dataList="content['brandList']"></Icons>
+									<Card cardTitle="新品上市"></Card>
+								</template>
 								<!-- 其他模版-->
-								<Banner v-if="v.type === 'bannerList'" :imgUrl="v.imgUrl"></Banner>
+								<!-- <Banner v-if="v.type === 'bannerList'" :imgUrl="v.imgUrl"></Banner>
 								
 								<template v-if="v.type === 'iconsList'">
 									<Icons  :dataList="v.data"></Icons>
@@ -60,20 +71,30 @@
 									<Shop  :dataList="v.data"></Shop>
 									<Card cardTitle="为您推荐"></Card>
 								</template>
-								
+								 -->
 								<!-- card放这里app显示不正常	 -->
-								<CommodityList v-if="v.type === 'comodityList'"  :dataList="v.data"></CommodityList>
+								<!-- <CommodityList v-if="v.type === 'comodityList'"  :dataList="v.data"></CommodityList> -->
+								<template v-if="'newProductList' in content">
+									<CommodityList :dataList="content['newProductList']"></CommodityList>
+									<Card cardTitle="热销爆品"></Card>
+								</template>
+								<template v-if="'hotProductList' in content">
+									<CommodityList  :dataList="content['hotProductList']"></CommodityList>
+									<Card cardTitle="为您推荐"></Card>
+								</template>
+								
+								<CommodityList v-if="recommendProductList.list.length != 0"  :dataList="recommendProductList.list"></CommodityList>
 								
 								
-								
-							</block>
+							<!-- </block> -->
+						<!-- </block> -->
 						</block>
 						<view v-else>
 							暂无数据...
 						</view>
 						
 						<view class="load-text f-color">
-							{{item.loadText}}
+							{{loadText}}
 						</view>
 					</scroll-view>
 						
@@ -102,9 +123,19 @@
 				scrollViewIdx:'child0',
 				contentHeight:0,
 				topBar:[
-					
+					{name:"推荐",id:1},
+					{name:"运动户外",id:2},
+					{name:"服饰内衣",id:3},
+					{name:"鞋靴箱包",id:4},
+					{name:"美妆个护",id:5},
+					{name:"数码家具",id:6},
+					{name:"食品母婴",id:7},
+					{name:"萌宠生活",id:8}
 				],
-				newTopBar:{}
+				content:{},
+				recommendProductList:{page:0,list:[]},
+				newTopBar:{},
+				loadText:"上拉加载更多",
 			}
 		},
 		components:{
@@ -140,14 +171,18 @@
 		methods: {
 			__init(){
 				$http.request({
-					url:API.LIST+"/0/0",
+					// url:API.LIST+"/0/0",
+					url:API.INDEX.CONTENT
 				}).then((res)=>{
-					this.topBar = res.topBar;
-					this.newTopBar = this.initData(res);
+					console.log('success',Object.keys(res).length);
+					this.content = res;
+					this.loadMore();
+					// this.topBar = res.topBar;
+					// this.newTopBar = this.initData(res);
 				}).catch((e)=>{
-					console.log("bad request",e);
+					console.log('failed');
 					uni.showToast({
-						title:"请求失败",
+						title:"请求失败:"+e,
 						icon:"none"
 					})
 				});
@@ -177,13 +212,11 @@
 				this.selectTab(e.detail.current);
 			},
 			fetchData(callback){
-				let index = this.curTabIdx;
-				let id = this.topBar[index].id;
-				let page = Math.ceil(this.newTopBar[index].data.length/5)+1;
 				$http.request({
-					url:API.LIST+`/${id}/${page}`,
+					url:API.INDEX.RECOMMENDS+"?pageNum="+this.recommendProductList.page,
 				}).then((res)=>{
-					this.newTopBar[index].data = [...this.newTopBar[index].data,...res];
+					// this.newTopBar[index].data = [...this.newTopBar[index].data,...res];
+					this.recommendProductList.list =  [...this.recommendProductList.list,...res];
 					if(typeof callback === "function"){
 						callback();
 					}
@@ -197,7 +230,9 @@
 			},
 			//上拉加载更多
 			loadMore(index){
-				this.newTopBar[index].loadText = '加载中...';
+				this.recommendProductList.page++;
+				// return;
+				// this.newTopBar[index].loadText = '加载中...';
 				this.fetchData(()=>{
 					this.loadText = "上拉加载更多...";
 				});

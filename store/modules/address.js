@@ -29,6 +29,7 @@ export default {
 		}
 	},
 	mutations:{
+		//todo 修正没有token清空下也去获取地址的bug
 		initAddress(state){
 			$http.request({
 				url:API.ADDRESS.LIST,

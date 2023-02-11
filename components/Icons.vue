@@ -1,7 +1,7 @@
 <template>
 	<view class="icons">
 		<view class="icons-item" v-for="(item, index) in dataList" :key="index">
-			<image class="icons-img" :src="item.imgUrl"></image>
+			<image class="icons-img" :src="item.logo"></image>
 			<text class="icons-name">{{item.name}}</text>
 		</view>
 		

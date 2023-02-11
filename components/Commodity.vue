@@ -11,7 +11,7 @@
 		>
 			<image 
 				class="commodity-img" 
-				:src="item.imgUrl"
+				:src="item.pic"
 				:style="'height:'+imgH+';' "
 				></image>
 			<view class="content">
@@ -20,8 +20,8 @@
 				:style="'font-size:'+titleFontSize+';' "
 				>{{item.name}}</text>
 				<view>
-					<text class="pprice">${{item.pprice}}</text>
-					<text class="oprice">${{item.oprice}}</text>
+					<text class="pprice">${{item.price}}</text>
+					<text class="oprice">${{item.originalPrice}}</text>
 				</view>
 				<text class="discount">{{item.discount}}折</text>
 			</view>

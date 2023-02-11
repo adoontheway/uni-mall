@@ -2,7 +2,7 @@
 	<view>
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
 			<swiper-item v-for="(item, index) in dataList" :key="index">
-				<image class="swiper-img" :src="item.imgUrl"></image>
+				<image class="swiper-img" :src="item.pic"></image>
 			</swiper-item>
 			
 		</swiper>
@@ -19,6 +19,9 @@
 		},
 		props:{
 			dataList:Array,
+		},
+		onShow(){
+			console.log(dataList);
 		}
 	}
 </script>

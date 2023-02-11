@@ -1,7 +1,8 @@
 import store from '@/store/index.js';
 export default {
 	common:{
-		baseUrl:"http://192.168.3.36:3000/api",
+		// baseUrl:"http://192.168.3.36:8085",
+		baseUrl:"http://mall.adxwork.com",
 		header:{
 			"Content-Type":"application/json",
 			"Content-Type":"application/x-www-form-urlencoded",
@@ -40,11 +41,14 @@ export default {
 			uni.request({
 				...options,
 				success:(result)=>{
-					if(result.statusCode != 200){
-						return rej();
+					if(result.statusCode != 200 ){
+						return rej(result.errMsg);
 					}
-					let data = result.data.data;
-					res(data);
+					
+					if(result.data.code != 200 ){
+						return rej(result.data.message);
+					}
+					res(result.data.data);
 				},
 				complete:()=>{
 					

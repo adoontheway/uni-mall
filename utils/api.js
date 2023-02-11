@@ -5,10 +5,11 @@
 const API_USER_LOGIN = 'user/login';
 
 const ADDRESS = {
-	LIST:'/address/list',
-	ADD:'/address/add',
-	DEL:'/address/delete',
-	UPDATE:'/address/update',
+	LIST:'/member/address/list',
+	ADD:'/member/address/add',
+	DEL:'/member/address/delete/{id}',
+	UPDATE:'/member/address/update/{id}',
+	DETAIL:'/member/address/{id}'
 };
 
 const CART = {
@@ -43,6 +44,21 @@ const USER = {
 	
 };
 
+const INDEX = {
+	//首页内容信息展示
+	CONTENT:'/home/content',
+	//分页获取推荐商品
+	RECOMMENDS:'/home/recommendProductList',
+	//获取首页商品分类
+	CATE_LIST:'/home/productCateList/{parentId}',
+	//根据分类获取专题
+	SUBJECT_LIST:'/home/subjectList',
+	//分页获取人气推荐商品
+	HOT_LIST:'/home/hotProductList',
+	//分页获取新品推荐商品
+	NEW_LIST:'/home/newProductList',
+}
+
 export default {
 	ADDRESS,
 	CART,
@@ -50,5 +66,6 @@ export default {
 	PAY,
 	GOODS,
 	LIST,
-	USER
+	USER,
+	INDEX
 }
