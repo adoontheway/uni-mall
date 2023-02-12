@@ -213,7 +213,7 @@
 			},
 			getData(id){
 				$http.request({
-					url:API.GOODS.INFO+"?id="+id,
+					url:API.GOODS.DETAIL.replace("{id}",id),
 				}).then((res)=>{
 					this.goodsInfo = res;
 				}).catch((e)=>{

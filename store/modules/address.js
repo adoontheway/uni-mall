@@ -2,6 +2,7 @@ import $http from "@/common/api/request.js";
 import API from "@/utils/api.js";
 export default {
 	state:{
+		flag:false,//是否已经初始化
 		list :[
 			{
 				id:1000,

@@ -11,9 +11,9 @@
 			<scroll-view scroll-x="true" class="scroll-content" :scroll-into-view="scrollViewIdx">
 				<view
 					class="scroll-item"
-					v-for="(item, index) in topBar"
+					v-for="(item, index) in navTabs"
 					:key="index"
-					@tap="selectTab(index)"
+					@tap="selectTab(item.id)"
 					:id="'child'+index"
 				>
 					<text :class="curTabIdx == index ? 'f-active-color':'f-color'">{{item.name}}</text>
@@ -116,6 +116,7 @@
 	import Icons from "@/components/Icons.vue";
 	import Hot from "@/components/Hot.vue";
 	import Shop from "@/components/Shop.vue";
+	import { mapGetters } from 'vuex';
 	export default {
 		data() {
 			return {
@@ -137,6 +138,9 @@
 				newTopBar:{},
 				loadText:"上拉加载更多",
 			}
+		},
+		computed{
+				...mapGetters(['navTabs'])
 		},
 		components:{
 			IndexSwiper,
@@ -171,14 +175,10 @@
 		methods: {
 			__init(){
 				$http.request({
-					// url:API.LIST+"/0/0",
 					url:API.INDEX.CONTENT
 				}).then((res)=>{
-					console.log('success',Object.keys(res).length);
 					this.content = res;
 					this.loadMore();
-					// this.topBar = res.topBar;
-					// this.newTopBar = this.initData(res);
 				}).catch((e)=>{
 					console.log('failed');
 					uni.showToast({
@@ -205,8 +205,8 @@
 				this.curTabIdx = id;
 				this.scrollViewIdx = `child${id}`;
 				// 切换标签页不触发加载
-				if(this.newTopBar[id].data.length == 0)
-					this.fetchData();
+				// if(this.newTopBar[id].data.length == 0)
+				// 	this.fetchData();
 			},
 			onTabChanged(e){
 				this.selectTab(e.detail.current);
