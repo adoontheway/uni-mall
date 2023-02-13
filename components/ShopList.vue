@@ -24,7 +24,7 @@
 		</view>
 		<NewLine></NewLine>
 		
-		<CommodityList  :dataList="dataList"></CommodityList>
+		<CommodityList  :dataList="dataList.list"></CommodityList>
 	</view>
 </template>
 
@@ -45,9 +45,8 @@
 						{name:"品牌",status:0,key:"brand"}
 					]
 				},
-				dataList:[
+				dataList:[],
 				
-				]
 			};
 		},
 		mounted() {
@@ -69,6 +68,9 @@
 				return {
 					[obj.key]:val
 				}
+			},
+			getSort(){
+				return 0;
 			}
 		},
 		methods:{
@@ -82,25 +84,25 @@
 				
 				this.shopList.curIndex = index;
 				this.getData();
+			},
+			getData(){
+				//todo 需要分页
+				$http.request({
+					url:API.GOODS.SEARCH+`?keyword=${this.keyword}&sort=${this.getSort}`,
+					// data:{
+					// 	...this.orderBy
+					// }
+				}).then((res)=>{
+					this.dataList = res;
+				}).catch((e)=>{
+					uni.showToast({
+						title:"请求失败",
+						icon:"none"
+					})
+				});
 			}
 		},
-		getData(){
-			//todo 需要分页
-			$http.request({
-				url:API.GOODS.SEARCH+`?keyword=${this.keyword}
-				&sort=${this.shopList.data[this.curIndex].status == 1 ? 'asc':'desc'}`,
-				// data:{
-				// 	...this.orderBy
-				// }
-			}).then((res)=>{
-				this.dataList = res.data;
-			}).catch((e)=>{
-				uni.showToast({
-					title:"请求失败",
-					icon:"none"
-				})
-			});
-		}
+		
 	}
 </script>
 

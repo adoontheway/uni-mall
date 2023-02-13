@@ -7,6 +7,7 @@ import address from "./modules/address.js";
 import user from "./modules/user.js";
 import order from "./modules/order.js";
 import category from "./modules/category.js";
+import collection from "./modules/collection.js";
 
 export default new Vuex.Store({
 	modules:{
@@ -14,6 +15,7 @@ export default new Vuex.Store({
 		address,
 		user,
 		order,
-		category
+		category,
+		collection
 	}
 });

@@ -55,6 +55,17 @@ const GOODS = {
 	SEARCH:'/product/search'//综合搜索、筛选、排序
 };
 
+/**
+ * 会员收藏管理
+ */
+const COLLECTION = {
+	ADD:'/member/productCollection/add',//添加商品收藏
+	DEL:'/member/productCollection/delete',//删除商品收藏
+	LIST:'/member/productCollection/list',//显示当前用户商品收藏列表
+	LIST:'/member/productCollection/detail',//显示商品收藏详情
+	CLEAR:'/member/productCollection/clear',//清空当前用户商品收藏列表
+};
+
 const LIST = "/list/data";
 
 const PAY = "/pay";
@@ -108,5 +119,6 @@ export default {
 	USER,
 	INDEX,
 	RETURN,
-	COUPON
+	COUPON,
+	COLLECTION
 }

@@ -16,6 +16,7 @@
 				
 			</swiper-item>
 		</swiper>
+		<!-- todo 添加收藏和取消收藏的按钮 -->
 		<block v-if="Object.keys(goodsInfo).length != 0">
 			<view  class="detail-goods">
 				<view class="price">${{goodsInfo.product.price}}</view>

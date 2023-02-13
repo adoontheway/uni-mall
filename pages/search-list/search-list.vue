@@ -1,6 +1,16 @@
 <template>
 	<view>
-		<ShopList :keyword="keyword"></ShopList>
+		<!-- <scroll-view
+			scroll-y="true" 
+			:style="'height:'+contentHeight+'px'"
+			@scrolltolower="loadMore(index)"
+		> -->
+			<ShopList :keyword="keyword"></ShopList>
+		<!-- </scroll-view> -->
+		
+		<!-- <view class="load-text f-color">
+			{{loadText}}
+		</view> -->
 	</view>
 </template>
 
@@ -9,7 +19,8 @@
 	export default {
 		data() {
 			return {
-				keyword:""
+				keyword:"",
+				loadText:"上拉加载更多",
 			}
 		},
 		onLoad(e) {
@@ -28,6 +39,10 @@
 	}
 </script>
 
-<style>
-
+<style scoped>
+.load-text{
+		border-top: 2rpx solid #636263;
+		line-height: 60rpx;
+		text-align: center;
+	}
 </style>

@@ -5,7 +5,7 @@
 		onLaunch: function() {
 			console.log('App Launch');
 			this.$store.commit('initUser');
-			// this.$store.commit('initCategory');
+			this.$store.commit('initCategory');
 			// this.$store.commit('initAddress');
 			
 			routingIntercept();

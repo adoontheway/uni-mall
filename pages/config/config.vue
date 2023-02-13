@@ -1,9 +1,15 @@
 <template>
 	<view class="config">
-		<view class="config-item" @tap="goAddressList">
-			<view>地址管理</view>
-			<view class="right-mark"> > </view>
+		<view class="part-header">
+			<view>账号设置</view>
+			<view>
+				<image src="../../static/logo.png"></image>
+				<view>{{userInfo.nickname}}</view>
+				<view>编辑个人资料</view>
+			</view>
+			<!-- <NewLine></NewLine> -->
 		</view>
+		
 		<view class="config-item">
 			<view>修改密码</view>
 			<view class="right-mark"> > </view>
@@ -12,9 +18,18 @@
 			<view>绑定手机号</view>
 			<view class="right-mark"> > </view>
 		</view>
+		<view class="config-item" @tap="goAddressList">
+			<view>地址管理</view>
+			<view class="right-mark"> > </view>
+		</view>
 		<view class="config-item">
 			<view>绑定第三方账号</view>
 			<view class="right-mark"> > </view>
+		</view>
+		
+		<view class="part-header">
+			<view>系统设置</view>
+			<!-- <NewLine></NewLine> -->
 		</view>
 		<view class="config-item">
 			<view>消息推送</view>
@@ -32,17 +47,47 @@
 			<view>清除缓存</view>
 			<view class="right-mark"> > </view>
 		</view>
+		
+		<view class="part-header">
+			<view>系统设置</view>
+			<!-- <NewLine></NewLine> -->
+		</view>
+		<view class="config-item">
+			<view>给于好评</view>
+			<view class="right-mark"> > </view>
+		</view>
+		<view class="config-item">
+			<view>意见反馈</view>
+			<view class="right-mark"> > </view>
+		</view>
+		<view class="config-item">
+			<view>推荐码</view>
+			<view class="right-mark"> > </view>
+		</view>
+		<view class="config-item">
+			<view>关于</view>
+			<view class="right-mark"> > </view>
+		</view>
 		<view class="my-exit" @tap="quit">退出登录</view>
 	</view>
 </template>
 
 <script>
-	import {mapMutations} from 'vuex';
+	import NewLine from "@/components/NewLine.vue";
+	import {mapMutations,mapState} from 'vuex';
 	export default {
 		data() {
 			return {
 				
 			}
+		},
+		components:{
+			NewLine
+		},
+		computed:{
+			...mapState({
+				userInfo:state=>state.user.userInfo,
+			})
 		},
 		methods: {
 			...mapMutations(['logout']),
@@ -86,5 +131,8 @@
 }
 .right-mark {
 	padding-right: 10rpx;
+}
+.part-header {
+	font-size: 26rpx;
 }
 </style>

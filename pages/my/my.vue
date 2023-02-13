@@ -58,10 +58,15 @@
 				<view>我的积分</view>
 				<view>></view>
 			</view>
+		</view>
+		<view class="my-content">
 			<view class="my-content-item">
 				<view>加入超级VIP</view>
 				<view>></view>
 			</view>
+		</view>
+		
+		<view class="my-content">
 			<view class="my-content-item">
 				<view>帮助中心</view>
 				<view>></view>

@@ -13,7 +13,7 @@
 					class="scroll-item"
 					v-for="(item, index) in navTabs"
 					:key="index"
-					@tap="selectTab(item.id)"
+					@tap="selectTab(index,item.id)"
 					:id="'child'+index"
 				>
 					<text :class="curTabIdx == index ? 'f-active-color':'f-color'">{{item.name}}</text>
@@ -22,11 +22,11 @@
 			
 			<swiper
 				@change="onTabChanged"
-				:current="curTabIdx"
+				:currentId="curTabIdx"
 				:style="'height:'+contentHeight+'px'"
 			>
 				<swiper-item
-					v-for=" index in topBar.length"
+					v-for=" index in navTabs.length"
 					
 					:key="index"
 				>
@@ -37,14 +37,14 @@
 						@scrolltolower="loadMore(index)"
 					>
 					
-						<block v-if="Object.keys(content).length !== 0">
+						<block v-if="contents[curTabIdx] ">
 						<!-- <block v-if="item.data.length > 0"> -->
 						
 							<!-- <block v-for="(v,k) in item.data" :key="k"> -->
 								<!-- 推荐模版-->
 								<!-- {{v}} -->
 								
-								<IndexSwiper v-if="'advertiseList' in content " :dataList="content['advertiseList']"></IndexSwiper>
+								<IndexSwiper v-if="'advertiseList' in contents[curTabIdx] " :dataList="contents[curTabIdx]['advertiseList']"></IndexSwiper>
 								<!-- <IndexSwiper v-if="v.type === 'swiperList'" :dataList="v.data"></IndexSwiper> -->
 								<!-- <template v-if="v.type === 'recommendList'">
 									<Recommand  :dataList="v.data"></Recommand>
@@ -52,8 +52,8 @@
 								</template> -->
 								
 								
-								<template v-if="'brandList' in content">
-									<Icons  :dataList="content['brandList']"></Icons>
+								<template v-if="'brandList' in contents[curTabIdx]">
+									<Icons  :dataList="contents[curTabIdx]['brandList']"></Icons>
 									<Card cardTitle="新品上市"></Card>
 								</template>
 								<!-- 其他模版-->
@@ -74,16 +74,16 @@
 								 -->
 								<!-- card放这里app显示不正常	 -->
 								<!-- <CommodityList v-if="v.type === 'comodityList'"  :dataList="v.data"></CommodityList> -->
-								<template v-if="'newProductList' in content">
-									<CommodityList :dataList="content['newProductList']"></CommodityList>
+								<template v-if="'newProductList' in contents[curTabIdx]">
+									<CommodityList :dataList="contents[curTabIdx]['newProductList']"></CommodityList>
 									<Card cardTitle="热销爆品"></Card>
 								</template>
-								<template v-if="'hotProductList' in content">
-									<CommodityList  :dataList="content['hotProductList']"></CommodityList>
+								<template v-if="'hotProductList' in contents[curTabIdx]">
+									<CommodityList  :dataList="contents[curTabIdx]['hotProductList']"></CommodityList>
 									<Card cardTitle="为您推荐"></Card>
 								</template>
 								
-								<CommodityList v-if="recommendProductList.list.length != 0"  :dataList="recommendProductList.list"></CommodityList>
+								<CommodityList v-if="recommendProductList[curTabIdx].list.length != 0"  :dataList="recommendProductList[curTabIdx].list"></CommodityList>
 								
 								
 							<!-- </block> -->
@@ -123,19 +123,21 @@
 				curTabIdx:0,
 				scrollViewIdx:'child0',
 				contentHeight:0,
-				topBar:[
-					{name:"推荐",id:1},
-					{name:"运动户外",id:2},
-					{name:"服饰内衣",id:3},
-					{name:"鞋靴箱包",id:4},
-					{name:"美妆个护",id:5},
-					{name:"数码家具",id:6},
-					{name:"食品母婴",id:7},
-					{name:"萌宠生活",id:8}
-				],
-				content:{},
-				recommendProductList:{page:0,list:[]},
-				newTopBar:{},
+				// topBar:[
+				// 	{name:"推荐",id:1},
+				// 	{name:"运动户外",id:2},
+				// 	{name:"服饰内衣",id:3},
+				// 	{name:"鞋靴箱包",id:4},
+				// 	{name:"美妆个护",id:5},
+				// 	{name:"数码家具",id:6},
+				// 	{name:"食品母婴",id:7},
+				// 	{name:"萌宠生活",id:8}
+				// ],
+				contents:[],
+				// content:{},
+				recommendProductList:[],
+				// newTopBar:{},
+				subjects:[],
 				loadText:"上拉加载更多",
 			}
 		},
@@ -177,46 +179,50 @@
 				$http.request({
 					url:API.INDEX.CONTENT
 				}).then((res)=>{
-					this.content = res;
+					console.log(this.navTabs.length);
+					this.contents = new Array(this.navTabs.length);
+					this.subjects = new Array(this.navTabs.length);
+					this.contents[this.curTabIdx] = res;
+					// this.content = res;
+					this.recommendProductList = new Array(this.navTabs.length).fill({page:0,list:[]});
 					this.loadMore();
 				}).catch((e)=>{
-					console.log('failed');
 					uni.showToast({
-						title:"请求失败:"+e,
+						title:"请求失败:",
 						icon:"none"
 					})
 				});
 			},
-			initData(res){
-				let arr = [];
-				for(let i = 0; i < this.topBar.length; i++){
-					let obj = {
-						data:[],
-						loadText:'上拉加载更多'
-					}
-					if( i == 0){
-						obj.data = res.data;
-					}
-					arr.push(obj);
+			
+			selectTab(index,id){
+				this.curTabIdx = index;
+				this.scrollViewIdx = `child${index}`;
+				if(this.subjects[this.curTabIdx] === undefined){
+					$http.request({
+						url:API.INDEX.SUBJECT_LIST+`?cateId=${id}`,
+					}).then((res)=>{
+						this.subjects[this.curTabIdx] =  res;
+					}).catch((e)=>{
+						uni.showToast({
+							title:"请求主题失败",
+							icon:"none"
+						})
+					});
 				}
-				return arr;
-			},
-			selectTab(id){
-				this.curTabIdx = id;
-				this.scrollViewIdx = `child${id}`;
 				// 切换标签页不触发加载
 				// if(this.newTopBar[id].data.length == 0)
 				// 	this.fetchData();
 			},
 			onTabChanged(e){
-				this.selectTab(e.detail.current);
+				let id = this.navTabs[e.detail.current].id;
+				this.selectTab(e.detail.current,id);
 			},
 			fetchData(callback){
 				$http.request({
-					url:API.INDEX.RECOMMENDS+"?pageNum="+this.recommendProductList.page,
+					url:API.INDEX.RECOMMENDS+"?pageNum="+this.recommendProductList[this.curTabIdx].page,
 				}).then((res)=>{
 					// this.newTopBar[index].data = [...this.newTopBar[index].data,...res];
-					this.recommendProductList.list =  [...this.recommendProductList.list,...res];
+					this.recommendProductList[this.curTabIdx].list =  [...this.recommendProductList[this.curTabIdx].list,...res];
 					if(typeof callback === "function"){
 						callback();
 					}
@@ -230,9 +236,7 @@
 			},
 			//上拉加载更多
 			loadMore(index){
-				this.recommendProductList.page++;
-				// return;
-				// this.newTopBar[index].loadText = '加载中...';
+				this.recommendProductList[this.curTabIdx].page++;
 				this.fetchData(()=>{
 					this.loadText = "上拉加载更多...";
 				});

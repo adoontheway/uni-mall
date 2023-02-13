@@ -31,7 +31,7 @@
 						class="right-list" 
 						v-for="(v,k) in dataList[curIdx].children"
 						:key="k"
-						@tap="goCate(v.id)"
+						@tap="goCate(v.name)"
 					>
 						<view class="list-title">{{v.name}}</view>
 						<view class="right-content">
@@ -112,8 +112,10 @@
 					return 0;
 				}
 			},
-			goCate(cateId){
-				
+			goCate(name){
+				uni.navigateTo({
+					url:`/pages/search-list/search-list?keyword=${name}`
+				});
 			}
 		}
 			
