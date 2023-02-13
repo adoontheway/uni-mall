@@ -100,6 +100,7 @@
 		},
 		computed:{
 			...mapState({
+				syncFlag:state=>state.cart.syncFlag,
 				dataList:state=>state.cart.dataList,
 				selectedList: state => state.cart.selectList,
 				orderList:state=>state.order.dataList,
@@ -108,6 +109,11 @@
 				'checkedAll',
 				'totalCount'
 				])
+		},
+		onLoad() {
+			if(!this.syncFlag){
+				this.$store.dispatch('syncCart');
+			}
 		},
 		methods: {
 			...mapActions(['checkAll','delGoods']),

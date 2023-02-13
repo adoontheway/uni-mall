@@ -15,7 +15,7 @@ export default async function (){
 		uni.addInterceptor(item, {
 			invoke(e){
 				const url =e.url.split('?')[0];
-				console.log('url',url);
+				// console.log('url',url);
 				
 				let pass;
 				if(whiteList){
@@ -26,7 +26,6 @@ export default async function (){
 						return url === item;
 					})
 				}
-				console.log(pass);
 				if(!pass && !getAuthorization()){
 					uni.showToast({
 						title:"请选登录",
@@ -38,14 +37,14 @@ export default async function (){
 					})
 					return false;
 				}
-				console.log('invoke:',e);
+				// console.log('invoke:',e);
 				return e;
 			},
 			success(args) {
-				console.log('interceptor-success',args)
+				// console.log('interceptor-success',args)
 			},
 			 complete(res) {
-			    console.log('interceptor-complete',res)
+			    // console.log('interceptor-complete',res)
 			  },
 			fail(err){
 				console.log('interceptor failed:',err)

@@ -3,6 +3,7 @@ import API from "@/utils/api.js";
 
 export default {
 	state:{
+		syncFlag:false,
 		dataList:[
 			{
 				checked:false,
@@ -51,6 +52,9 @@ export default {
 		}
 	},
 	mutations:{
+		syncCartFn(state,list){
+			state.dataList = list;
+		},
 		//全选方法
 		checkAll(state){
 			state.selectList = state.dataList.map(v=>{
@@ -129,6 +133,18 @@ export default {
 				title:"删除成功",
 				icon:"none"
 			})
-		}
+		},
+		syncCart({commit}){
+			$http.request({
+				url:API.CART.LIST,
+			}).then((res)=>{
+				commit('syncCartFn',res);
+			}).catch((e)=>{
+				uni.showToast({
+					title:"获取商品分类失败",
+					icon:"none"
+				})
+			});
+		},
 	}
 }

@@ -41,6 +41,7 @@ export default {
 			uni.request({
 				...options,
 				success:(result)=>{
+					console.log('success:',options.url,result);
 					if(result.statusCode != 200 ){
 						return rej(result.errMsg);
 					}
@@ -50,14 +51,17 @@ export default {
 					}
 					res(result.data.data);
 				},
-				complete:()=>{
-					
+				complete:(e)=>{
+					// console.log('complete:',e);
+				},
+				fail:(e)=> {
+					// console.log('fail:',e);
 				}
 			})
 		});
 	},
 	// 登录或者初始化的时候调用此方法在请求头中加入token
-	addToken(token){
-		this.common.header['authorization'] = token;
+	addToken(head,token){
+		this.common.header['Authorization'] = head+token;
 	}
 }

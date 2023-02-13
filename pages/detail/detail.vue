@@ -16,26 +16,38 @@
 				
 			</swiper-item>
 		</swiper>
-		
-		<view class="detail-goods">
-			<view class="price">$399.99</view>
-			<view class="oprice">$599.00</view>
-			<view class="good-name">
-				Redmi Note 11 5G 天玑810 33W Pro快充 5000mAh大电池 6GB +128GB 神秘黑境 智能手机 小米 红米
+		<block v-if="Object.keys(goodsInfo).length != 0">
+			<view  class="detail-goods">
+				<view class="price">${{goodsInfo.product.price}}</view>
+				<view class="oprice">${{goodsInfo.product.originalPrice}}</view>
+				<view class="good-name">
+					{{goodsInfo.product.name}}
+				</view>
+				<view class="good-subtitle">
+					{{goodsInfo.product.subTitle}}
+				</view>
+				<view class="good-description">
+					{{goodsInfo.product.description}}
+				</view>
 			</view>
+			<!-- todo 如何插入描述信息 -->
+			<!-- <p><img class=\"wscnph\" src=\"http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20180615/5b2254e8N414e6d3a.jpg\" width=\"500\" /></p> -->
+			<view>
+				<view>
+					<image class="detail-img" :src="goodsInfo.brand.logo"></image>
+				</view>
+				<view>
+					<image class="detail-img" :src="goodsInfo.brand.bigPic"></image>
+				</view>
+				<view>
+					<image class="detail-img" src="'../../static/img/preview2.png'"></image>
+				</view>
+			</view>
+		</block>
+		<view v-else>
+			努力加载数据中....
 		</view>
 		
-		<view>
-			<view>
-				<image class="detail-img" src="'../../static/img/preview0.png'"></image>
-			</view>
-			<view>
-				<image class="detail-img" src="'../../static/img/preview1.png'"></image>
-			</view>
-			<view>
-				<image class="detail-img" src="'../../static/img/preview2.png'"></image>
-			</view>
-		</view>
 		<!-- 商品列表 -->
 		<Card cardTitle="看了又看"></Card>
 		<CommodityList  :dataList="shopList"></CommodityList>
@@ -141,6 +153,12 @@
 				]
 			}
 		},
+		// mounted() {
+		// 	const query = uni.createSelectorQuery().in(this);
+		// 	query.select('#text').boundingClientRect(data => {
+		// 		console.log(data)
+		// 	}).exec();
+		// },
 		components:{
 			Card,
 			CommodityList,

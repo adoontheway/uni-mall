@@ -94,7 +94,7 @@
 			OtherLogin,
 		},
 		methods: {
-			...mapMutations(['login']),
+			...mapMutations(['setToken']),
 			goBack(){
 				uni.navigateBack();
 			},
@@ -106,20 +106,14 @@
 				
 				$http.request({
 					url:API.USER.LOGIN,
-					methods:'POST',
+					method:'POST',
 					data:{
-						userName:this.username,
-						userPwd:this.userpwd
+						username:this.username,
+						password:this.userpwd
 					}
 				}).then((res)=>{
 					console.log(JSON.stringify(res));
-					if(res.code === 0)
-						this.login(res.data);
-					else
-						uni.showToast({
-							title:res.msg,
-							icon:"none"
-						})
+					this.setToken(res);
 				}).catch((e)=>{
 					console.log("bad request",e);
 					uni.showToast({
@@ -203,7 +197,7 @@
 	padding: 10rpx 0;
 	display: flex;
 	border-bottom: 2rpx solid #f7f7f7;
-	text-align: center;
+	/* text-align: center; */
 }
 .form-label {
 	padding-left: 10rpx;

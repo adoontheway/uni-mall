@@ -7,7 +7,7 @@
 					<image class="config-img" src="../../static/img/config.png"></image>
 				</view>
 				<view class="header-logo" > <!-- @tap="goLogin"> -->
-					<image class="logo-img" :src="loginStatus ? userInfo.avatar:'../../static/img/16.png'"></image>
+					<image class="logo-img" :src="loginStatus ? userInfo.icon:'../../static/img/16.png'"></image>
 					<view class="logo-name">
 						{{loginStatus ?　userInfo.nickname : '用户昵称'}}
 					</view>

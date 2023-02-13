@@ -29,8 +29,9 @@
 				>
 					<view 
 						class="right-list" 
-						v-for="(v,k) in dataList[curIdx].data"
+						v-for="(v,k) in dataList[curIdx].children"
 						:key="k"
+						@tap="goCate(v.id)"
 					>
 						<view class="list-title">{{v.name}}</view>
 						<view class="right-content">
@@ -39,7 +40,7 @@
 								:key="k1"
 								class="right-item"
 							>
-								<image class="right-img" :src="v1.imgUrl"></image>
+								<image class="right-img" :src="v1.icon.length != 0 ? v1.icon : '../../static/img/2.png' "></image>
 								<view class="right-name">{{v1.name}}</view>
 							</view>
 						</view>
@@ -57,10 +58,10 @@
 	import NewLine from "@/components/NewLine.vue";
 	import $http from "@/common/api/request.js";
 	import API from "@/utils/api.js";
+	import { mapState } from 'vuex';
 	export default {
 		data() {
 			return {
-				dataList:[],
 				curIdx:0,
 				contentHeight:0,
 			}
@@ -70,6 +71,11 @@
 		},
 		components:{
 			NewLine
+		},
+		computed:{
+			...mapState({
+				dataList:state=>state.category.dataList,
+			}),
 		},
 		onReady(){
 			uni.getSystemInfo({
@@ -87,35 +93,31 @@
 		},
 		methods: {
 			getData(){
-				$http.request({
-						url:API.GOODS.LIST
-					}).then((res)=>{
-						// console.log(JSON.stringify(res));
-						this.dataList = res;
-					}).catch((e)=>{
-						uni.showToast({
-							title:"请求失败",
-							icon:"none"
-						})
-					});
-				},
-				selectType(idx){
-					this.curIdx = idx;
-				},
-				getClientHeight(){
-					const res = uni.getSystemInfoSync();
-					const platform = res.platform;
-					if(platform == "ios"){
-						return 44 + res.statusBarHeight;
-					}else if(platform == "android"){
-						return 48 + res.statusBarHeight;
-					}else{
-						return 0;
-					}
+				if(this.dataList.length == 0){
+					this.$store.commit('initCategory');
 				}
+				
+			},
+			selectType(idx){
+				this.curIdx = idx;
+			},
+			getClientHeight(){
+				const res = uni.getSystemInfoSync();
+				const platform = res.platform;
+				if(platform == "ios"){
+					return 44 + res.statusBarHeight;
+				}else if(platform == "android"){
+					return 48 + res.statusBarHeight;
+				}else{
+					return 0;
+				}
+			},
+			goCate(cateId){
+				
 			}
-			
 		}
+			
+	}
 	
 </script>
 

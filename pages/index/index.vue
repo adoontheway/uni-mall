@@ -139,7 +139,7 @@
 				loadText:"上拉加载更多",
 			}
 		},
-		computed{
+		computed:{
 				...mapGetters(['navTabs'])
 		},
 		components:{

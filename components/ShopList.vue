@@ -55,6 +55,8 @@
 		},
 		props:{
 			keyword:String,
+			brandId:Number,
+			productCategoryId:Number,
 		},
 		components:{
 			NewLine,
@@ -85,8 +87,8 @@
 		getData(){
 			//todo 需要分页
 			$http.request({
-				url:API.GOODS.SEARCH+`?name=${this.keyword}
-				&${this.shopList.data[this.curIndex].key}=${this.shopList.data[this.curIndex].status == 1 ? 'asc':'desc'}`,
+				url:API.GOODS.SEARCH+`?keyword=${this.keyword}
+				&sort=${this.shopList.data[this.curIndex].status == 1 ? 'asc':'desc'}`,
 				// data:{
 				// 	...this.orderBy
 				// }
