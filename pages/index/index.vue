@@ -27,7 +27,6 @@
 			>
 				<swiper-item
 					v-for=" index in navTabs.length"
-					
 					:key="index"
 				>
 				
@@ -44,7 +43,7 @@
 								<!-- 推荐模版-->
 								<!-- {{v}} -->
 								
-								<IndexSwiper v-if="'advertiseList' in contents[curTabIdx] " :dataList="contents[curTabIdx]['advertiseList']"></IndexSwiper>
+								<IndexSwiper v-if="contents[curTabIdx]['advertiseList'] " :dataList="contents[curTabIdx]['advertiseList']"></IndexSwiper>
 								<!-- <IndexSwiper v-if="v.type === 'swiperList'" :dataList="v.data"></IndexSwiper> -->
 								<!-- <template v-if="v.type === 'recommendList'">
 									<Recommand  :dataList="v.data"></Recommand>
@@ -52,7 +51,7 @@
 								</template> -->
 								
 								
-								<template v-if="'brandList' in contents[curTabIdx]">
+								<template v-if="contents[curTabIdx]['brandList']">
 									<Icons  :dataList="contents[curTabIdx]['brandList']"></Icons>
 									<Card cardTitle="新品上市"></Card>
 								</template>
@@ -74,11 +73,11 @@
 								 -->
 								<!-- card放这里app显示不正常	 -->
 								<!-- <CommodityList v-if="v.type === 'comodityList'"  :dataList="v.data"></CommodityList> -->
-								<template v-if="'newProductList' in contents[curTabIdx]">
+								<template v-if="contents[curTabIdx]['newProductList']">
 									<CommodityList :dataList="contents[curTabIdx]['newProductList']"></CommodityList>
 									<Card cardTitle="热销爆品"></Card>
 								</template>
-								<template v-if="'hotProductList' in contents[curTabIdx]">
+								<template v-if="contents[curTabIdx]['hotProductList']">
 									<CommodityList  :dataList="contents[curTabIdx]['hotProductList']"></CommodityList>
 									<Card cardTitle="为您推荐"></Card>
 								</template>

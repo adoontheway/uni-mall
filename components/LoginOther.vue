@@ -1,7 +1,7 @@
 <template>
 	<view class="login-other">
 		<view class="other-txt">
-			<view>或者用一下方式登陆</view>
+			<view>或者用以下方式登陆</view>
 		</view>
 		<view class="other">
 			<view class="other-item" @tap="loginWith3rd('weixin')">
@@ -30,8 +30,9 @@
 				
 			};
 		},
-		method:{
+		methods:{
 			loginWith3rd(model){
+				console.log('login by 3rd:', model);
 				uni.login({
 					provider:model,
 					success:(res)=> {
@@ -60,7 +61,7 @@
 						// 	errMsg:''
 						// }
 						//需要将openid存放起来，作为唯一身份
-						
+						console.log(res);
 						// 获取用户信息
 						uni.getUserInfo({
 							provider:model,
@@ -122,10 +123,7 @@
 										icon:"none"
 									})
 								});
-								// todo 需要给服务端传递用于生成账号的值
-								// {
-									
-								// }
+								
 							}
 						})
 					}

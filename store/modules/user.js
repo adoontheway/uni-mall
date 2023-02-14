@@ -16,10 +16,12 @@ export default {
 		// 进入app的时候读取本地用户信息
 		initUser(state){
 			let userInfo = uni.getStorageSync('userInfo');
-			let tokenInfo = JSON.parse(getAuthorization());
+			let tokenInfo = getAuthorization();
 			if(tokenInfo){
+				tokenInfo = JSON.parse(tokenInfo);
 				$http.addToken(tokenInfo.tokenHead, tokenInfo.token);
 			}
+			
 			if(userInfo){
 				userInfo = JSON.parse(userInfo);
 				state.userInfo = userInfo;

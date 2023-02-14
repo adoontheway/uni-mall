@@ -17,6 +17,9 @@
 			</swiper-item>
 		</swiper>
 		<!-- todo 添加收藏和取消收藏的按钮 -->
+		<view @tap="addCollection">
+			<image src="../../static/img/like.png"></image>
+		</view>
 		<block v-if="Object.keys(goodsInfo).length != 0">
 			<view  class="detail-goods">
 				<view class="price">${{goodsInfo.product.price}}</view>
@@ -272,18 +275,14 @@
 					})
 				}).catch((e)=>{
 					uni.showToast({
-						title:"请求失败",
+						title:"加入购物车失败",
 						icon:"none"
 					})
 				});
-				// this.goodsInfo['checked'] = false;
-				// this.goodsInfo['num'] = this.num; 
-				// this.addGood(this.goodsInfo);
-				// this.hidePop();
-				// uni.showToast({
-				// 	title:'加入购物车成功',
-				// 	icon:'none'
-				// })
+			},
+			// 添加收藏
+			addCollection(){
+				
 			}
 		}
 	}

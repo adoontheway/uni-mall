@@ -10,7 +10,7 @@
 				下一步
 			</view>
 			<view class="remind">
-				继续注册表示您阅读并同意<text class="f-active-color"><京东商城（含App）服务协议></text>
+				继续注册表示您阅读并同意<text class="f-active-color">《京东商城（含App）服务协议》</text>
 			</view>
 		</view>
 		
