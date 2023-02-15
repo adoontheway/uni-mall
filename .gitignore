@@ -1,3 +1,4 @@
 ./server/node_modules
 .hbuilderx
 /server/node_modules
+/unpackage/dist

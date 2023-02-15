@@ -84,8 +84,8 @@
 						msg:"用户名账号不能为空"
 					},
 					userpwd:{
-						rule:/^[0-9a-zA-Z]{6,16}$/,
-						msg:"密码应该是6-16为字符"
+						rule:/^[0-9a-zA-Z]{5,12}$/,
+						msg:"密码应该是5-12为字符"
 					}
 				}
 			}
@@ -96,31 +96,34 @@
 		methods: {
 			...mapMutations(['setToken']),
 			goBack(){
-				uni.navigateBack();
+				// uni.navigateBack();
+				uni.switchTab({
+					url:"/pages/index/index"
+				})
 			},
 			submit(){
 				if(this.validate('username') && this.validate('userpwd')){
-					// todo 登陆
-					this.goBack();
-				}
+					
+					$http.request({
+						url:API.USER.LOGIN,
+						method:'POST',
+						data:{
+							username:this.username,
+							password:this.userpwd
+						}
+					}).then((res)=>{
+						console.log(JSON.stringify(res));
+						this.setToken(res);
+						this.goBack();
+					}).catch((e)=>{
+						console.log("bad request",e);
+						uni.showToast({
+							title:"请求失败",
+							icon:"none"
+						})
+					});
 				
-				$http.request({
-					url:API.USER.LOGIN,
-					method:'POST',
-					data:{
-						username:this.username,
-						password:this.userpwd
-					}
-				}).then((res)=>{
-					console.log(JSON.stringify(res));
-					this.setToken(res);
-				}).catch((e)=>{
-					console.log("bad request",e);
-					uni.showToast({
-						title:"请求失败",
-						icon:"none"
-					})
-				});
+				}
 			},
 			//判断验证是否复合要求
 			validate(key){

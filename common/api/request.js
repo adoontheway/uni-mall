@@ -47,6 +47,11 @@ export default {
 					}
 					
 					if(result.data.code != 200 ){
+						if(result.data.code == 401 ){
+							uni.navigateTo({
+								url:"/pages/login/login"
+							});
+						}
 						return rej(result.data.message);
 					}
 					res(result.data.data);

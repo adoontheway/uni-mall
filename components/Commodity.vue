@@ -19,11 +19,11 @@
 				class="commodity-name"
 				:style="'font-size:'+titleFontSize+';' "
 				>{{item.name}}</text>
-				<view>
+				<view class="price-container">
 					<text class="pprice">${{item.price}}</text>
 					<text class="oprice">${{item.originalPrice}}</text>
 				</view>
-				<text class="discount">{{item.discount}}折</text>
+				<text class="discount">{{item.discount ? item.discount : 9.5 }}折</text>
 			</view>
 		</view>
 		
@@ -67,7 +67,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 .commodity{
 	display: flex;
 	/* flex-wrap: wrap; */
@@ -104,5 +104,9 @@
 	padding: 2rpx 10rpx;
 	/* font-size: 20rpx; */
 	color: red;
+}
+.price-container {
+	display: flex;
+	flex-direction: column;
 }
 </style>

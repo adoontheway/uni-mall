@@ -2,8 +2,8 @@
 	<view class="config">
 		<view class="part-header">
 			<view>账号设置</view>
-			<view>
-				<image src="../../static/logo.png"></image>
+			<view class="user-info">
+				<image class="logo-img" src="../../static/logo.png"></image>
 				<view>{{userInfo.nickname}}</view>
 				<view>编辑个人资料</view>
 			</view>
@@ -113,6 +113,18 @@
 <style scoped>
 .config {
 	
+}
+.logo-img {
+	width: 120rpx;
+	height: 120rpx;
+	border: 2rpx solid #cccccc;
+	border-radius: 50%;
+	background-color: #ffffff;
+}
+.user-info {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 .config-item {
 	display: flex;

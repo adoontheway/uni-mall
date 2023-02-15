@@ -4,10 +4,10 @@
 		<view class="my-header">
 			<view class="header-main">
 				<view class="header-config" @tap="goConfig">
-					<image class="config-img" src="../../static/img/config.png"></image>
+					<image class="config-img" src="http://cdn.adxwork.com/mall-app/static/img/config.png"></image>
 				</view>
 				<view class="header-logo" > <!-- @tap="goLogin"> -->
-					<image class="logo-img" :src="loginStatus ? userInfo.icon:'../../static/img/16.png'"></image>
+					<image class="logo-img" :src="loginStatus ? userInfo.icon:'http://cdn.adxwork.com/mall-app/static/img/16.png'"></image>
 					<view class="logo-name">
 						{{loginStatus ?　userInfo.nickname : '用户昵称'}}
 					</view>
@@ -22,23 +22,23 @@
 			</view>
 			<view class="order-list">
 				<view class="order-item">
-					<image class="order-img" src="../../static/img/order0.png"></image>
+					<image class="order-img" src="http://cdn.adxwork.com/mall-app/static/img/order0.png"></image>
 					<text>待付款</text>
 				</view>
 				<view class="order-item">
-					<image class="order-img" src="../../static/img/order1.png"></image>
+					<image class="order-img" src="http://cdn.adxwork.com/mall-app/static/img/order1.png"></image>
 					<text>待发货</text>
 				</view>
 				<view class="order-item">
-					<image class="order-img" src="../../static/img/order2.png"></image>
+					<image class="order-img" src="http://cdn.adxwork.com/mall-app/static/img/order2.png"></image>
 					<text>待收获</text>
 				</view>
 				<view class="order-item">
-					<image class="order-img" src="../../static/img/order3.png"></image>
+					<image class="order-img" src="http://cdn.adxwork.com/mall-app/static/img/order3.png"></image>
 					<text>待评价</text>
 				</view>
 				<view class="order-item">
-					<image class="order-img" src="../../static/img/order4.png"></image>
+					<image class="order-img" src="http://cdn.adxwork.com/mall-app/static/img/order4.png"></image>
 					<text>退款管理</text>
 				</view>
 			</view>
@@ -121,7 +121,7 @@
 
 <style scoped>
 .my-header {
-	background: url('../../static/img/2.png') no-repeat;
+	background: url('http://cdn.adxwork.com/mall-app/static/img/2.png') no-repeat;
 	width: 100%;
 	height: 400rpx;
 }
