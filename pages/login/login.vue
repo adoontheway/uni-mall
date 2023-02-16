@@ -43,7 +43,7 @@
 									<text class="form-label">账号</text><input v-model='username' type="text" placeholder="请输入手机号昵称"/>
 								</view>
 								<view class="login-user">
-									<text class="form-label">密码</text><input v-model='userpwd' type="safe-password" placeholder="6-16为字符"/>
+									<text class="form-label">密码</text><input v-model='userpwd' password="true" placeholder="6-16为字符"/>
 								</view>
 							</view>
 							<view class="login-quick">
@@ -71,7 +71,7 @@
 <script>
 	import $http from "@/common/api/request.js";
 	import API from "@/utils/api.js";
-	import OtherLogin from '../../components/LoginOther.vue';
+	import OtherLogin from '@/components/LoginOther.vue';
 	import {mapMutations} from 'vuex';
 	export default {
 		data() {
@@ -84,7 +84,7 @@
 						msg:"用户名账号不能为空"
 					},
 					userpwd:{
-						rule:/^[0-9a-zA-Z]{5,12}$/,
+						rule:/\S{5,12}$/,
 						msg:"密码应该是5-12为字符"
 					}
 				}
@@ -127,6 +127,7 @@
 			},
 			//判断验证是否复合要求
 			validate(key){
+				console.log(key,this[key],this.rules[key].rule.test(this[key]));
 				if(!this.rules[key].rule.test(this[key])){
 					uni.showToast({
 						title:this.rules[key].msg,

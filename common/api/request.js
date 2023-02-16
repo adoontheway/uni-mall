@@ -4,11 +4,52 @@ export default {
 		baseUrl:"https://mall.adxwork.com",
 		header:{
 			"Content-Type":"application/json",
-			// "Content-Type":"application/x-www-form-urlencoded",
+			"Content-Type":"application/x-www-form-urlencoded",
 		},
 		data:{},
 		method:"GET",
 		dataType:"json"
+	},
+	request_json(options={}){
+		uni.showLoading({
+			title:"加载中"
+		});
+		options.url = this.common.baseUrl+options.url;
+		options.data = options.data || this.common.data;
+		options.header = options.header || this.common.header;
+		options.header["Content-Type"] ="application/json";
+		options.method = options.method || this.common.method;
+		options.dataType = options.dataType || this.common.dataType;
+		setTimeout(()=>{
+			uni.hideLoading();
+		},1000);
+		return new Promise((res, rej)=>{
+			uni.request({
+				...options,
+				success:(result)=>{
+					console.log('success:',options.url,result);
+					if(result.statusCode != 200 ){
+						return rej(result.errMsg);
+					}
+					
+					if(result.data.code != 200 ){
+						if(result.data.code == 401 ){
+							uni.navigateTo({
+								url:"/pages/login/login"
+							});
+						}
+						return rej(result.data.message);
+					}
+					res(result.data.data);
+				},
+				complete:(e)=>{
+					// console.log('complete:',e);
+				},
+				fail:(e)=> {
+					// console.log('fail:',e);
+				}
+			})
+		});
 	},
 	request(options={}){
 		uni.showLoading({
@@ -16,7 +57,8 @@ export default {
 		});
 		options.url = this.common.baseUrl+options.url;
 		options.data = options.data || this.common.data;
-		options.header = options.header || this.common.header;
+		options.header = options.header || this.common.header;	
+		options.header["Content-Type"] = "application/x-www-form-urlencoded";
 		options.method = options.method || this.common.method;
 		options.dataType = options.dataType || this.common.dataType;
 		setTimeout(()=>{

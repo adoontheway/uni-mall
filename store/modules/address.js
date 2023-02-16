@@ -34,7 +34,7 @@ export default {
 		initAddress(state){
 			$http.request({
 				url:API.ADDRESS.LIST,
-			}).then((res)=>{
+			},true).then((res)=>{
 				state.list = res;
 			}).catch((e)=>{
 				uni.showToast({
@@ -65,7 +65,7 @@ export default {
 				commit('resetDefault');
 			}
 			
-			$http.request({
+			$http.request_json({
 				url:API.ADDRESS.ADD,
 				method:'POST',
 				data:obj
@@ -82,12 +82,13 @@ export default {
 			
 		},
 		updateAddressFn({commit}, obj){
-			console.log(JSON.stringify(obj));
 			if(obj.obj.defaultStatus != 0){
 				commit('resetDefault');
 			}
-			$http.request({
+			$http.request_json({
 				url:API.ADDRESS.UPDATE,
+				method:'POST',
+				data:obj.obj
 			}).then((res)=>{
 				// state.list.push(obj);
 				commit('updateAddress',obj);

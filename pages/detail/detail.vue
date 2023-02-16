@@ -23,7 +23,7 @@
 		<block v-if="goodsInfo.product">
 			<view  class="detail-goods">
 				<view class="price">${{goodsInfo.product.price}}</view>
-				<view class="oprice">${{goodsInfo.product.originalPrice}}</view>
+				<view class="oprice f-color">${{goodsInfo.product.originalPrice}}</view>
 				<view class="good-name">
 					{{goodsInfo.product.name}}
 				</view>
@@ -75,7 +75,7 @@
 			<view class="mask" @tap="hidePop"></view>
 			<view class="pop-box" :animation="animationData">
 				<view>
-					<image class="pop-icon" src="http://cdn.adxwork.com/mall-app/static/img/item1.jpeg"></image>
+					<image class="pop-icon" :src="goodsInfo.product.pic"></image>
 				</view>
 				<view class="pop-count">
 					<view>购买数量</view>
@@ -206,17 +206,14 @@
 				var animation = uni.createAnimation({
 				  duration: 200,
 				});
-				animation.translateY(600).step();
+				animation.translateY(400).step();
 				this.animationData = animation.export();
 				setTimeout(()=>{
 					animation.translateY(0).step();
 					this.animationData = animation.export();
 				},200);
 			},
-			addCart(){
-				this.showPop();
-				this.isPop = true;
-			},
+			
 			buyNow(){
 				this.showPop();
 				this.isPop = true;
@@ -225,7 +222,7 @@
 				var animation = uni.createAnimation({
 				  duration: 1000,
 				});
-				animation.translateY(600).step();
+				animation.translateY(400).step();
 				this.animationData = animation.export();
 				setTimeout(()=>{
 					animation.translateY(0).step();
@@ -254,7 +251,7 @@
 				})
 			},
 			addCart(){
-				$http.request({
+				$http.request_json({
 					url:API.CART.ADD,
 					data:{
 						//id
@@ -282,7 +279,7 @@
 			},
 			// 添加收藏
 			addCollection(){
-				
+				console.log("add collection");
 			}
 		}
 	}
@@ -370,7 +367,7 @@ swiper {
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	height: 400px;
+	height: 500rpx;
 	background-color: #ffffff;
 }
 .pop-icon {

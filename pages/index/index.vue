@@ -179,12 +179,18 @@
 					url:API.INDEX.CONTENT
 				}).then((res)=>{
 					console.log(this.navTabs.length);
-					this.contents = new Array(this.navTabs.length);
-					this.subjects = new Array(this.navTabs.length);
-					this.contents[this.curTabIdx] = res;
-					// this.content = res;
-					this.recommendProductList = new Array(this.navTabs.length).fill({page:0,list:[]});
-					this.loadMore();
+					if(this.navTabs.length == 0){
+						let wait = setInterval(()=>{
+							if(this.navTabs.length == 0){
+								this.initContents(res);
+								clearInterval(wait);
+							}
+						},200);
+					}else{
+						this.initContents(res);
+					}
+					
+					
 				}).catch((e)=>{
 					uni.showToast({
 						title:"请求失败:",
@@ -192,7 +198,13 @@
 					})
 				});
 			},
-			
+			initContents(res){
+				this.contents = new Array(this.navTabs.length);
+				this.subjects = new Array(this.navTabs.length);
+				this.contents[this.curTabIdx] = res;
+				this.recommendProductList = new Array(this.navTabs.length).fill({page:0,list:[]});
+				this.loadMore();
+			},
 			selectTab(index,id){
 				this.curTabIdx = index;
 				this.scrollViewIdx = `child${index}`;
