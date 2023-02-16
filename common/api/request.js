@@ -1,7 +1,7 @@
 export default {
 	common:{
 		// baseUrl:"http://192.168.3.36:8085",
-		baseUrl:"http://mall.adxwork.com",
+		baseUrl:"https://mall.adxwork.com",
 		header:{
 			"Content-Type":"application/json",
 			// "Content-Type":"application/x-www-form-urlencoded",
