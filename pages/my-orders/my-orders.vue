@@ -29,7 +29,7 @@
 							<!-- 店家和买家信息 -->
 							<view class="shop-info">
 								<view class="shop-part">
-									<image class="shop-icon" src="../../static/img/14.jpeg"></image>
+									<image class="shop-icon" src="https://cdn.adxwork.com/mall-server/static/img/14.jpeg"></image>
 									<view class="shop-name">
 										太湖雪床上用品专卖店
 									</view>

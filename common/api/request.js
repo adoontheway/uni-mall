@@ -1,11 +1,10 @@
-import store from '@/store/index.js';
 export default {
 	common:{
 		// baseUrl:"http://192.168.3.36:8085",
 		baseUrl:"http://mall.adxwork.com",
 		header:{
 			"Content-Type":"application/json",
-			"Content-Type":"application/x-www-form-urlencoded",
+			// "Content-Type":"application/x-www-form-urlencoded",
 		},
 		data:{},
 		method:"GET",
@@ -20,20 +19,6 @@ export default {
 		options.header = options.header || this.common.header;
 		options.method = options.method || this.common.method;
 		options.dataType = options.dataType || this.common.dataType;
-		// if(options.header.token){
-		// 	options.header.token = store.state.user.token;
-		// 	if(options.header.token){
-		// 		uni.showToast({
-		// 			title:"请选登录",
-		// 			icon:"none"
-		// 		});
-		// 		return uni.navigateTo({
-		// 			url:"login"
-		// 		});
-		// 	}
-		// }else{
-			
-		// }
 		setTimeout(()=>{
 			uni.hideLoading();
 		},2000);

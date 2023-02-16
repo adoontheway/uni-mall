@@ -13,7 +13,7 @@ export default {
 						goods_item:[
 							{
 								name:"做点办公室椅垫3D网眼透气防滑竹炭垫学生餐椅汽车垫夏天防汗",
-								imgUrl:'../../static/img/14.jpeg',
+								imgUrl:'https://cdn.adxwork.com/mall-server/static/img/14.jpeg',
 								attrs:"颜色分类：竹炭做点黑色 尺寸：45*45cm",
 								pprice:299.00,
 								num:1,

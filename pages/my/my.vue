@@ -48,36 +48,36 @@
 		<view class="my-content">
 			<view class="my-content-item">
 				<view>我的收藏</view>
-				<view>></view>
+				<view class="f-color">></view>
 			</view>
 			<view class="my-content-item">
 				<view>我的优惠券</view>
-				<view>></view>
+				<view class="f-color">></view>
 			</view>
 			<view class="my-content-item">
 				<view>我的积分</view>
-				<view>></view>
+				<view class="f-color">></view>
 			</view>
 		</view>
 		<view class="my-content">
 			<view class="my-content-item">
 				<view>加入超级VIP</view>
-				<view>></view>
+				<view class="f-color">></view>
 			</view>
 		</view>
 		
 		<view class="my-content">
 			<view class="my-content-item">
 				<view>帮助中心</view>
-				<view>></view>
+				<view class="f-color">></view>
 			</view>
 			<view class="my-content-item">
 				<view>联系客服</view>
-				<view>></view>
+				<view class="f-color">></view>
 			</view>
 			<view class="my-content-item">
 				<view>上架入驻</view>
-				<view>></view>
+				<view class="f-color">></view>
 			</view>
 		</view>
 	</view>
@@ -175,6 +175,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 }
 .my-content {
 	margin: 20rpx 0;

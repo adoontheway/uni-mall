@@ -1,11 +1,14 @@
 <template>
 	<view class="config">
-		<view class="part-header">
-			<view>账号设置</view>
+		<NewLine></NewLine>
+		<view class="part-header bottom-line">
+			<view class="header bottom-line">账号设置</view>
 			<view class="user-info">
-				<image class="logo-img" src="../../static/logo.png"></image>
-				<view>{{userInfo.nickname}}</view>
-				<view>编辑个人资料</view>
+				<view class="user-name">
+					<image class="logo-img" src="http://cdn.adxwork.com/mall-app/static/logo.png"></image>
+					<view>{{userInfo.nickname}}</view>
+				</view>
+				<view class="f-color">编辑个人资料 > </view>
 			</view>
 			<!-- <NewLine></NewLine> -->
 		</view>
@@ -27,9 +30,8 @@
 			<view class="right-mark"> > </view>
 		</view>
 		
-		<view class="part-header">
-			<view>系统设置</view>
-			<!-- <NewLine></NewLine> -->
+		<view class="part-header bottom-line">
+			<view class="header">系统设置</view>
 		</view>
 		<view class="config-item">
 			<view>消息推送</view>
@@ -48,9 +50,8 @@
 			<view class="right-mark"> > </view>
 		</view>
 		
-		<view class="part-header">
-			<view>系统设置</view>
-			<!-- <NewLine></NewLine> -->
+		<view class="part-header bottom-line">
+			<view class="header">系统设置</view>
 		</view>
 		<view class="config-item">
 			<view>给于好评</view>
@@ -125,6 +126,15 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	padding: 20rpx 0 20rpx 20rpx;
+}
+.user-name {
+	display: flex;
+	align-items: center;
+	padding: 10rpx 10rpx;
+}
+.user-name view {
+	padding-left: 10rpx;
 }
 .config-item {
 	display: flex;
@@ -145,6 +155,14 @@
 	padding-right: 10rpx;
 }
 .part-header {
+	line-height: 40rpx;
+	padding: 20rpx 30rpx 20rpx 0;
+}
+.header {
 	font-size: 26rpx;
+	padding:30rpx 0rpx 0rpx 20rpx;
+}
+.bottom-line {
+	border-bottom: 2rpx solid #cccccc;
 }
 </style>

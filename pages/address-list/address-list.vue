@@ -2,18 +2,18 @@
 	<view class="address-list">
 		<view class="list">
 			<view 
-				class="address-item"
+				class="address-item f-color"
 				v-for="(item, index) in list"
 				:key="index"
 				@tap="selectItem(index)"
 			>
-				<view class="item-parts">
-					<view>{{item.name}}</view>
-					<view>{{item.tel}}</view>
+				<view class="item-parts ">
+					<view >{{item.name}}</view>
+					<view class="item-phone">{{item.phoneNumber}}</view>
 				</view>
 				<view class="item-parts">
-					<view class="active" v-show="item.isDefault">默认</view>
-					<view>{{item.city}} {{item.details}}  </view>
+					<view class="active" v-show="item.defaultStatus==1">默认</view>
+					<view>{{item.province}} {{item.city}} {{item.region}} {{item.detailAddress}}  </view>
 				</view>
 			</view>
 		</view>
@@ -91,7 +91,11 @@
 	display: flex;
 	align-items: center;
 }
+.item-phone {
+	padding-left: 20rpx;
+}
 .active {
+	width: 50rpx;
 	padding-right: 10rpx;
 	background-color: #49bdfb;
 	color: #ffffff;

@@ -15,17 +15,19 @@ export default {
 	mutations:{
 		// 进入app的时候读取本地用户信息
 		initUser(state){
-			let userInfo = uni.getStorageSync('userInfo');
+			
 			let tokenInfo = getAuthorization();
 			if(tokenInfo){
 				tokenInfo = JSON.parse(tokenInfo);
 				$http.addToken(tokenInfo.tokenHead, tokenInfo.token);
 			}
 			
+			let userInfo = uni.getStorageSync('userInfo');
 			if(userInfo){
 				userInfo = JSON.parse(userInfo);
 				state.userInfo = userInfo;
 				state.loginStatus = true;
+				this.commit('initAddress');
 				// state.token = userInfo.token;// 根据jwt机制，检查是否过时
 			}else{
 				if(tokenInfo){
@@ -44,6 +46,7 @@ export default {
 		login(state, userInfo){
 			state.userInfo = userInfo;
 			state.loginStatus = true;
+			this.commit('initAddress');
 			// 持久化
 			uni.setStorageSync('userInfo',JSON.stringify(userInfo));
 		},

@@ -6,14 +6,14 @@
 		</view>
 		<view class="add-item">
 			<view>手 机 号</view>
-			<input placeholder="11位手机号" v-model="addrObj.tel"/>
+			<input placeholder="11位手机号" v-model="addrObj.phoneNumber"/>
 		</view>
 		<view class="add-item">
 			<view>所在地区</view>
 			<view 
 				@tap="showCityPicker" 
 				style="flex:1; text-align: right; padding-right: 10rpx;"
-			>{{addrObj.city}}</view>
+			>{{addrObj.province}} {{addrObj.city}} {{addrObj.region}}</view>
 			<mpvueCityPicker 
 				ref="mpvueCityPicker"
 				:pickerValueDefault="pickerValueDefault"
@@ -22,7 +22,7 @@
 		</view>
 		<view class="add-item">
 			<view>详细地址</view>
-			<input placeholder="5-60个字符" v-model="addrObj.details"/>
+			<input placeholder="5-60个字符" v-model="addrObj.detailAddress"/>
 		</view>
 		<view class="add-item">
 			<view>邮编</view>
@@ -31,7 +31,7 @@
 		<view class="add-item">
 			<checkbox-group @change="radioChange">
 				<label>
-					<checkbox :checked="addrObj.isDefault">设为默认地址</checkbox>
+					<checkbox :checked="addrObj.defaultStatus == 1">设为默认地址</checkbox>
 				</label>
 			</checkbox-group>
 			
@@ -46,12 +46,14 @@
 		data() {
 			return {
 				addrObj:{
+					province:'',
 					city:"请选择",
+					region:'',
 					name:"",
-					tel:"",
-					details:"",
-					isDefault:false,
-					cityCode:""
+					phoneNumber:"",
+					detailAddress:"",
+					defaultStatus:0,
+					postCode:""
 				},
 				pickerValueDefault:[0,0,1],
 				index:-1,
@@ -67,6 +69,7 @@
 		},
 		onLoad(e){
 			this.index = parseInt(e.index);
+			console.log(this.index);
 			if(this.index !== -1){
 				// 不能直接赋值，那是同一个引用
 				// 在这里直接修改list里面的值的话不合理
@@ -92,11 +95,15 @@
 				this.$refs.mpvueCityPicker.show();
 			},
 			onConfirm(e){
-				this.addrObj.city = e.label;
-				this.addrObj.cityCode = e.cityCode;
+				console.log(e);
+				let arr = e.label.split("-");
+				this.addrObj.province = arr[0];
+				this.addrObj.city = arr[1];
+				this.addrObj.region = arr[2];
+				this.addrObj.postCode = e.cityCode;
 			},
 			radioChange(e){
-				this.addrObj.isDefault = !this.addrObj.isDefault;
+				this.addrObj.defaultStatus = this.addrObj.defaultStatus == 0 ? 1 : 0;
 			}
 		}
 	}

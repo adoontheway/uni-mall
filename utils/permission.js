@@ -3,6 +3,10 @@ import { getAuthorization } from '@/utils/auth.js';
 const whiteList = [
 	"/",
 	"/pages/login/login",
+	"/pages/detail/detail",
+	"/pages/search/search",
+	"/pages/search-list/search-list",
+	"/pages/index/index",
 	"//pages/logout/logout",
 	{pattern: /^\/pages\/list.*/},
 	'/pages/my/my',
@@ -15,7 +19,6 @@ export default async function (){
 		uni.addInterceptor(item, {
 			invoke(e){
 				const url =e.url.split('?')[0];
-				// console.log('url',url);
 				
 				let pass;
 				if(whiteList){
@@ -47,7 +50,7 @@ export default async function (){
 			    // console.log('interceptor-complete',res)
 			  },
 			fail(err){
-				console.log('interceptor failed:',err)
+				// console.log('interceptor failed:',err)
 			}
 		})
 	})

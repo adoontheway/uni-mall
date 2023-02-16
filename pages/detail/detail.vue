@@ -17,10 +17,10 @@
 			</swiper-item>
 		</swiper>
 		<!-- todo 添加收藏和取消收藏的按钮 -->
-		<view @tap="addCollection">
-			<image src="../../static/img/like.png"></image>
+		<view class="like-view" @tap="addCollection">
+			<image class="like-img" src="../../static/img/like.png"></image>
 		</view>
-		<block v-if="Object.keys(goodsInfo).length != 0">
+		<block v-if="goodsInfo.product">
 			<view  class="detail-goods">
 				<view class="price">${{goodsInfo.product.price}}</view>
 				<view class="oprice">${{goodsInfo.product.originalPrice}}</view>
@@ -44,7 +44,7 @@
 					<image class="detail-img" :src="goodsInfo.brand.bigPic"></image>
 				</view>
 				<view>
-					<image class="detail-img" src="'../../static/img/preview2.png'"></image>
+					<image class="detail-img" src="http://cdn.adxwork.com/mall-app/static/img/preview2.png"></image>
 				</view>
 			</view>
 		</block>
@@ -75,7 +75,7 @@
 			<view class="mask" @tap="hidePop"></view>
 			<view class="pop-box" :animation="animationData">
 				<view>
-					<image class="pop-icon" src="../../static/img/item1.jpeg"></image>
+					<image class="pop-icon" src="http://cdn.adxwork.com/mall-app/static/img/item1.jpeg"></image>
 				</view>
 				<view class="pop-count">
 					<view>购买数量</view>
@@ -109,14 +109,14 @@
 				animationData:{},
 				goodsInfo:{},
 				swiperList:[
-					{imgUrl:'../../static/img/preview0.png'},
-					{imgUrl:'../../static/img/preview1.png'},
-					{imgUrl:'../../static/img/preview2.png'}
+					{imgUrl:'http://cdn.adxwork.com/mall-app/static/img/preview0.png'},
+					{imgUrl:'http://cdn.adxwork.com/mall-app/static/img/preview1.png'},
+					{imgUrl:'http://cdn.adxwork.com/mall-app/static/img/preview2.png'}
 				],
 				shopList:[
 					{
 						id:1,
-						imgUrl:"../../static/img/item2.jpeg",
+						imgUrl:"http://cdn.adxwork.com/mall-app/static/img/item2.jpeg",
 						name:"Apple iPhone 14 Pro (A2892) 256GB 暗紫色 支持移动联通电信5G 双卡双待手机",
 						pprice:"199.00",
 						oprice:"299.00",
@@ -124,7 +124,7 @@
 					},
 					{
 						id:2,
-						imgUrl:"../../static/img/item1.jpeg",
+						imgUrl:"http://cdn.adxwork.com/mall-app/static/img/item1.jpeg",
 						name:"OPPO K9x 8GB+128GB 银紫超梦 天玑810 5000mAh长续航 33W快充 90Hz电竞屏 6400万三摄 拍照5G手机oppok9x",
 						pprice:"188.00",
 						oprice:"299.00",
@@ -132,7 +132,7 @@
 					},
 					{
 						id:3,
-						imgUrl:"../../static/img/item0.jpeg",
+						imgUrl:"http://cdn.adxwork.com/mall-app/static/img/item0.jpeg",
 						name:"Redmi Note 11 5G 天玑810 33W Pro快充 5000mAh大电池 6GB +128GB 神秘黑境 智能手机 小米 红米",
 						pprice:"188.00",
 						oprice:"399.00",
@@ -140,7 +140,7 @@
 					},
 					{
 						id:4,
-						imgUrl:"../../static/img/item2.jpeg",
+						imgUrl:"http://cdn.adxwork.com/mall-app/static/img/item2.jpeg",
 						name:"Apple iPhone 14 Pro (A2892) 256GB 暗紫色 支持移动联通电信5G 双卡双待手机",
 						pprice:"199.00",
 						oprice:"299.00",
@@ -148,7 +148,7 @@
 					},
 					{
 						id:5,
-						imgUrl:"../../static/img/item1.jpeg",
+						imgUrl:"http://cdn.adxwork.com/mall-app/static/img/item1.jpeg",
 						name:"OPPO K9x 8GB+128GB 银紫超梦 天玑810 5000mAh长续航 33W快充 90Hz电竞屏 6400万三摄 拍照5G手机oppok9x",
 						pprice:"188.00",
 						oprice:"299.00",
@@ -258,7 +258,7 @@
 					url:API.CART.ADD,
 					data:{
 						//id
-						id: this.goodsInfo.id,
+						id: this.goodsInfo.product.id,
 						// 数量
 						num: this.num,
 						// 规格
@@ -389,5 +389,14 @@ swiper {
 	background-color: #49bdfb;
 	color: #ffffff;
 	text-align: center;
+}
+.like-view {
+	position: absolute;
+	right: 40rpx;
+	top: 600rpx;
+}
+.like-img {
+	width: 80rpx;
+	height: 80rpx;
 }
 </style>
