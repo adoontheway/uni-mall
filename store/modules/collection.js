@@ -44,8 +44,7 @@ export default {
 			$http.request({
 				url:API.COLLECTION.ADD,
 				data:{
-					id:goodInfo.id,
-					num:goodInfo.num
+					productId:goodInfo.id,
 				},
 				method:'POST',
 			}).then((res)=>{

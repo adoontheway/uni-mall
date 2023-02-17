@@ -76,9 +76,7 @@
 			<view class="shop-list-empty">
 				<text>囧～购物车还是空的</text>
 			</view>
-		</template>
-		
-		
+		</template>	
 	</view>
 </template>
 
@@ -174,7 +172,7 @@
 
 <style scoped>
 .shop-list {
-	padding-bottom: 100rpx;
+	padding-bottom: 60rpx;
 }
 .shop-list-empty{
 	position: absolute;

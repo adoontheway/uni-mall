@@ -46,6 +46,9 @@
 				<view>
 					<image class="detail-img" src="http://cdn.adxwork.com/mall-app/static/img/preview2.png"></image>
 				</view>
+			<!-- 	<view>
+					<text v-html=""></text>
+				</view> -->
 			</view>
 		</block>
 		<view v-else>
