@@ -43,6 +43,7 @@ export default {
 					res(result.data.data);
 				},
 				complete:(e)=>{
+					uni.hideLoading();
 					// console.log('complete:',e);
 				},
 				fail:(e)=> {

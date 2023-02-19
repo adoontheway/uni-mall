@@ -3,7 +3,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				// "navigationBarTitleText": "京东",
+				"navigationBarTitleText": "Mall",
 				"navigationBarBackgroundColor": "#FFFFFF",
 				"navigationStyle": "custom",
 				"app-plus": {
@@ -29,7 +29,9 @@
             "path" : "pages/list/list",
             "style" :
             {
-            	"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarTitleText": "Mall",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationStyle": "custom",
             	"app-plus": {
             		"scrollIndicator": "none",
             		"titleNView": {
@@ -51,7 +53,9 @@
             "path" : "pages/cart/cart",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+               "navigationBarTitleText": "Mall",
+               "navigationBarBackgroundColor": "#FFFFFF",
+               "navigationStyle": "custom",
                 "enablePullDownRefresh": false,
 				"app-plus": {
 					"scrollIndicator": "none",
@@ -66,7 +70,9 @@
             "path" : "pages/my/my",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "我的",
+                "navigationBarTitleText": "Mall",
+                "navigationBarBackgroundColor": "#FFFFFF",
+                "navigationStyle": "custom",
                 "enablePullDownRefresh": false,
 				"app-plus": {
 					"scrollIndicator": "none",
@@ -278,12 +284,50 @@
             }
             
         }
+        ,{
+            "path" : "pages/user-info/user-info",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/update-password/update-password",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/member-center/member-center",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"float": "right",
+								"text": "?",
+								"fontSize": "18px"
+							}
+						]
+					}
+				}
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "京东商城",
 		"navigationBarBackgroundColor": "#FFFFFF",
-		"backgroundColor": "#cccccc"
+		"backgroundColor": "#EBEBEB"
 	},
 	"uniIdRouter": {},
 	"tabBar": {

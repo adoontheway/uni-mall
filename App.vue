@@ -1,14 +1,14 @@
 <script>
-	import routingIntercept from '@/utils/permission.js';
+	// import routingIntercept from '@/utils/permission.js';
 	
 	export default {
 		onLaunch: function() {
 			console.log('App Launch');
 			this.$store.commit('initUser');
-			this.$store.commit('initCategory');
+			// this.$store.commit('initCategory');
 			// this.$store.commit('initAddress');
 			
-			routingIntercept();
+			// routingIntercept();
 			
 			
 		},

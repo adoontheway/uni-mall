@@ -8,6 +8,7 @@ import user from "./modules/user.js";
 import order from "./modules/order.js";
 import category from "./modules/category.js";
 import collection from "./modules/collection.js";
+import subjects from "./modules/subjects.js";
 
 export default new Vuex.Store({
 	modules:{
@@ -16,6 +17,7 @@ export default new Vuex.Store({
 		user,
 		order,
 		category,
-		collection
+		collection,
+		subjects
 	}
 });

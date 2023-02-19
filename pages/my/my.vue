@@ -31,7 +31,7 @@
 				</view>
 				<view class="order-item">
 					<image class="order-img" src="http://cdn.adxwork.com/mall-app/static/img/order2.png"></image>
-					<text>待收获</text>
+					<text>待收货</text>
 				</view>
 				<view class="order-item">
 					<image class="order-img" src="http://cdn.adxwork.com/mall-app/static/img/order3.png"></image>
@@ -39,7 +39,7 @@
 				</view>
 				<view class="order-item">
 					<image class="order-img" src="http://cdn.adxwork.com/mall-app/static/img/order4.png"></image>
-					<text>退款管理</text>
+					<text>售后服务</text>
 				</view>
 			</view>
 		</view>

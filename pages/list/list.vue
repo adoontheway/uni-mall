@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="list-body">
 		<NewLine></NewLine>
 		<view class="list">
 			<block v-if="dataList.length > 0">
@@ -27,24 +27,19 @@
 					class="list-right"
 					:style="'height:'+contentHeight+'px'"
 				>
-					<view 
-						class="right-list" 
-						v-for="(v,k) in dataList[curIdx].children"
-						:key="k"
-						@tap="goCate(v.name)"
-					>
-						<view class="list-title">{{v.name}}</view>
-						<view class="right-content">
-							<view 
-								v-for="(v1,k1) in v.data"
-								:key="k1"
-								class="right-item"
-							>
-								<image class="right-img" :src="v1.icon.length != 0 ? v1.icon : '../../static/img/2.png' "></image>
-								<view class="right-name">{{v1.name}}</view>
-							</view>
+					<view class="right-content">
+						<view
+							class="right-item" 
+							v-for="(v,k) in dataList[curIdx].children"
+							:key="k"
+							@tap="goCate(v.keywords)"
+						>
+						
+							<image class="right-img" :src="(v.icon && (v.icon.length != 0)) ? v.icon : 'http://cdn.adxwork.com/mall-app/static/img/2.png' "></image>
+							<view class="right-name">{{v.name}}</view>
 						</view>
 					</view>
+					
 				</scroll-view>
 			</block>
 			<view v-else>数据加载中...</view>
@@ -56,8 +51,6 @@
 
 <script>
 	import NewLine from "@/components/NewLine.vue";
-	import $http from "@/common/api/request.js";
-	import API from "@/utils/api.js";
 	import { mapState } from 'vuex';
 	export default {
 		data() {
@@ -80,7 +73,6 @@
 		onReady(){
 			uni.getSystemInfo({
 				success:(res)=>{
-					// console.log(JSON.stringify(res));
 					this.contentHeight = res.windowHeight;// - uni.upx2px(80) - this.getClientHeight();
 				},
 			})
@@ -124,6 +116,9 @@
 </script>
 
 <style scoped>
+.list-body {
+	margin-top: 180rpx;
+}
 .list {
 	display: flex;
 }
@@ -132,7 +127,7 @@
 }
 .left-item{
 	border-bottom: 2rpx solid #ffffff;
-	font-size: 20rpx;
+	/* font-size: 26rpx; */
 	background-color: #f7f7f7;
 }
 .left-name {
@@ -165,11 +160,13 @@
 	height: 150rpx;
 }
 .right-item {
-	width: 150rpx;
+	width: 220rpx;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
 	padding: 10rpx;
+	margin: 10rpx;
+	background-color: #f7f7f7;
 }
 </style>

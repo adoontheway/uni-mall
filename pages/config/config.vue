@@ -3,7 +3,7 @@
 		<NewLine></NewLine>
 		<view class="part-header bottom-line">
 			<view class="header bottom-line">账号设置</view>
-			<view class="user-info">
+			<view class="user-info" @tap="goUserInfo">
 				<view class="user-name">
 					<image class="logo-img" src="http://cdn.adxwork.com/mall-app/static/logo.png"></image>
 					<view>{{userInfo.nickname}}</view>
@@ -13,7 +13,7 @@
 			<!-- <NewLine></NewLine> -->
 		</view>
 		
-		<view class="config-item">
+		<view class="config-item" @tap="goUpdatePasswod">
 			<view>修改密码</view>
 			<view class="right-mark"> > </view>
 		</view>
@@ -30,6 +30,10 @@
 			<view class="right-mark"> > </view>
 		</view>
 		
+		<view class="config-item member-item" @tap="goMemberCenter">
+			<view>我是会员</view>
+			<view class="right-mark f-color"> 钻石会员 > </view>
+		</view>
 		<view class="part-header bottom-line">
 			<view class="header">系统设置</view>
 		</view>
@@ -97,6 +101,21 @@
 					url:"/pages/address-list/address-list"
 				})
 			},
+			goUserInfo(){
+				uni.navigateTo({
+					url:"/pages/user-info/user-info"
+				})
+			},
+			goUpdatePasswod(){
+				uni.navigateTo({
+					url:"/pages/update-password/update-password"
+				})
+			},
+			goMemberCenter(){
+				uni.navigateTo({
+					url:"/pages/member-center/member-center"
+				})
+			},
 			quit(){
 				this.logout();
 				uni.showToast({
@@ -146,6 +165,7 @@
 	background-color: #49bdfb;
 	width: 100%;
 	height: 80rpx;
+	line-height: 80rpx;
 	color: #ffffff;
 	text-align: center;
 	font-size: 32rpx;
