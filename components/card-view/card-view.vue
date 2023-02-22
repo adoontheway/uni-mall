@@ -53,7 +53,7 @@
 	padding: 20rpx;
 	margin-top: 10rpx;
 	width: 100%;
-	background-color: aliceblue;
+	/* background-color: aliceblue; */
 }
 .header {
 	display: flex;

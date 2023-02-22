@@ -43,28 +43,15 @@
 					title="品牌制造商直供" 
 					:showMore="true"
 				>
-					<view class="brands" >
-						<view 
-							class="brand-item"
-							v-for="(brand, bi) in content['brandList']"
-							:key="bi"
-						>
-							<view class="brand-name">{{brand.name}}制造商</view>
-							<view class="brand-price">9.9元起</view>
-							<view>
-								<image class="brand-img" :src="brand.logo"></image>
-							</view>
-						</view>
-					</view>
-				</card-view>		
+					<Brands :dataList="content['brandList']"></Brands>
+				</card-view>
+						
 				<!-- 秒杀专区 -->
 				<card-view 
 					title="秒杀专区" 
 					v-show="Object.keys(content['homeFlashPromotion']).length != 0"
 				>
-					<view class="flushs">
-						
-					</view>
+					<Flashes :flashObj="content['homeFlashPromotion']"></Flashes>
 				</card-view>			
 				
 				<!-- 新鲜好物 -->
@@ -73,28 +60,7 @@
 					:showMore="true"
 					v-show="Object.keys(content['newProductList']).length != 0"
 				>
-					
-					<view class="brands">
-						<view 
-						v-for="(new_item, vi) in content['newProductList']"
-							class="new-item"
-							:key="vi"
-						>
-							<image
-								class="brand-img" 
-								:src="new_item.pic"
-							></image>
-							<text
-								class="brand-name"
-							>{{new_item.name}}</text>
-							<text
-								class="item-subTitle"
-							>{{new_item.subTitle}}</text>
-							<view class="item-price">
-								${{new_item.price}}
-							</view>
-						</view>
-					</view>
+					<Freshes :dataList="content['newProductList']"></Freshes>				
 				</card-view>
 				
 				<!-- 人气推荐 -->
@@ -103,30 +69,7 @@
 					:showMore="true"
 					v-show="Object.keys(content['hotProductList']).length != 0"
 				>
-					<view class="hots">
-						<view 
-							v-for="(hot_item, hi) in content['hotProductList']"
-							class="hot-item"
-							:key="hi"
-						>
-							<image
-								class="hot-img" 
-								:src="hot_item.pic"
-							></image>
-							<view class="hot-desc">
-								<text
-									class="hot-name"
-								>{{hot_item.name}}</text>
-								<text
-									class="item-subTitle"
-								>{{hot_item.subTitle}}</text>
-								<view class="item-price">
-									${{hot_item.price}}
-								</view>
-							</view>
-							
-						</view>
-					</view>
+					<Hots :dataList="content['hotProductList']"></Hots>
 				</card-view>
 				
 				<!-- 专题精选 -->
@@ -136,30 +79,7 @@
 					:moreCall="moreSubjects"
 					v-show="Object.keys(content['subjectList']).length != 0"
 				>
-					<view class="hots">
-						<view 
-							v-for="(sub_item, si) in content['subjectList']"
-							class="hot-item"
-							:key="si"
-						>
-							<image
-								class="hot-img" 
-								:src="sub_item.pic"
-							></image>
-							<view class="hot-desc">
-								<text
-									class="hot-name"
-								>{{sub_item.name}}</text>
-								<text
-									class="item-subTitle"
-								>{{sub_item.subTitle}}</text>
-								<view class="item-price">
-									${{sub_item.price}}起
-								</view>
-							</view>
-							
-						</view>
-					</view>
+					<Subject :dataList="content['subjectList']"></Subject>
 				</card-view>
 				
 				<!-- 猜你喜欢 -->
@@ -168,28 +88,7 @@
 					:showMore="true"
 					v-show="recommendProduct.list.length != 0"
 				>
-					<view class="recommands">
-						<view 
-							v-for="(recommand_item, ri) in recommendProduct.list"
-							class="recommand-item"
-							:key="ri"
-						>
-							<image
-								class="recommand-img" 
-								:src="recommand_item.pic"
-							></image>
-							<text
-								class="hot-name"
-							>{{recommand_item.name}}</text>
-							<text
-								class="item-subTitle"
-							>{{recommand_item.subTitle}}</text>
-							<view class="item-price">
-								${{recommand_item.price}}起
-							</view>
-							
-						</view>
-					</view>
+					<Recommends :dataList="recommendProduct.list"></Recommends>
 				</card-view>
 				
 			</block>
@@ -317,7 +216,7 @@
 			},
 			moreSubjects(){
 				uni.switchTab({
-					url:"/pages/cart/cart"
+					url:"/pages/subject/subject"
 				})
 			}
 		}
@@ -369,94 +268,7 @@
 		justify-content: center;
 		align-items: center;
 	}
-	.brands{
-		display: flex;
-		padding: 20rpx;
-		flex-wrap: wrap;
-	}
-	.brand-item {
-		width: 320rpx;
-		display: flex;
-		flex-direction: column;
-		padding: 10rpx;
-	}
-	.brand-img {
-		height: 375rpx;
-		width: 100%;
-	}
-	.brand-name{
-		overflow: hidden;
-		text-overflow: ellipsis;
-		display: -webkit-box;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
-		color: #333333;
-		word-break: break-all;
-		padding: 6rpx 20rpx;
-	}
-	.brand-price{
-		color: #cccccc;
-		padding: 6rpx 20rpx;
-		font-size: 28rpx;
-	}
-	
-	.item-price {
-		color: red;
-	}
-	.item-subTitle {
-		color: darkgrey;
-	}
-	.new-item {
-		width: 320rpx;
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-		padding: 10rpx;
-	}
-	.hot-item {
-		display: flex;
-		padding: 20rpx;
-	}
-	.hot-img {
-		width: 320rpx;
-		height: 320rpx;
-	}
-	.hot-desc {
-		display: flex;
-		flex: 1;
-		flex-direction: column;
-		padding-left: 20rpx;
-	}
 	
 	
-	.recommands{
-		display: flex;
-		padding: 20rpx;
-		flex-wrap: wrap;
-	}
-	.recommand-item {
-		width: 320rpx;
-		display: flex;
-		flex-direction: column;
-		padding: 10rpx;
-	}
-	.recommand-img {
-		height: 375rpx;
-		width: 100%;
-	}
-	.recommand-name{
-		overflow: hidden;
-		text-overflow: ellipsis;
-		display: -webkit-box;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
-		color: #333333;
-		word-break: break-all;
-		padding: 6rpx 20rpx;
-	}
-	.recommand-price{
-		color: #cccccc;
-		padding: 6rpx 20rpx;
-		font-size: 28rpx;
-	}
+	
 </style>

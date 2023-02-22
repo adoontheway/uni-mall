@@ -27,3 +27,10 @@
 
 
 ## 线上对接
+
+## TODO
+### Header问题
+* web暂时不管
+* 小程序端需要调整
+* android
+* iphone

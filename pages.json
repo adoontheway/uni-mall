@@ -3,7 +3,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "Mall",
+				// "navigationBarTitleText": "Mall",
 				"navigationBarBackgroundColor": "#FFFFFF",
 				"navigationStyle": "custom",
 				"app-plus": {
@@ -29,31 +29,31 @@
             "path" : "pages/list/list",
             "style" :
             {
-				"navigationBarTitleText": "Mall",
+				// "navigationBarTitleText": "Mall",
 				"navigationBarBackgroundColor": "#FFFFFF",
 				"navigationStyle": "custom",
             	"app-plus": {
             		"scrollIndicator": "none",
             		"titleNView": {
-            			"searchInput": {
-            				"placeholder": "请输入关键字",
-            				"disabled": true,
-            				"align": "left",
-            				"autoFocus": false,
-            				"borderRadius": "15px",
-            				"backgroundColor": "#f7f7f7",
-            				"placeholderColor": "#b3b3b3"
-            			}
+            			// "searchInput": {
+            			// 	"placeholder": "请输入关键字",
+            			// 	"disabled": true,
+            			// 	"align": "left",
+            			// 	"autoFocus": false,
+            			// 	"borderRadius": "15px",
+            			// 	"backgroundColor": "#f7f7f7",
+            			// 	"placeholderColor": "#b3b3b3"
+            			// }
             		}
             	}
             }
             
         }
         ,{
-            "path" : "pages/cart/cart",
+            "path" : "pages/subject/subject",
             "style" :                                                                                    
             {
-               "navigationBarTitleText": "Mall",
+               // "navigationBarTitleText": "Mall",
                "navigationBarBackgroundColor": "#FFFFFF",
                "navigationStyle": "custom",
                 "enablePullDownRefresh": false,
@@ -70,7 +70,7 @@
             "path" : "pages/my/my",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "Mall",
+                // "navigationBarTitleText": "Mall",
                 "navigationBarBackgroundColor": "#FFFFFF",
                 "navigationStyle": "custom",
                 "enablePullDownRefresh": false,
@@ -347,7 +347,7 @@
 				"selectedIconPath": "static/tabbar/category-selected.png"
 			},
 			{
-				"pagePath": "pages/cart/cart",
+				"pagePath": "pages/subject/subject",
 				"text": "专题",
 				"iconPath": "static/tabbar/cart.png",
 				"selectedIconPath": "static/tabbar/cart-selected.png"

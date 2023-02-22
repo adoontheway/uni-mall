@@ -21,19 +21,13 @@
 			<view>绑定手机号</view>
 			<view class="right-mark"> > </view>
 		</view>
-		<view class="config-item" @tap="goAddressList">
-			<view>地址管理</view>
-			<view class="right-mark"> > </view>
-		</view>
+		
 		<view class="config-item">
 			<view>绑定第三方账号</view>
 			<view class="right-mark"> > </view>
 		</view>
 		
-		<view class="config-item member-item" @tap="goMemberCenter">
-			<view>我是会员</view>
-			<view class="right-mark f-color"> 钻石会员 > </view>
-		</view>
+		
 		<view class="part-header bottom-line">
 			<view class="header">系统设置</view>
 		</view>
@@ -96,11 +90,7 @@
 		},
 		methods: {
 			...mapMutations(['logout']),
-			goAddressList(){
-				uni.navigateTo({
-					url:"/pages/address-list/address-list"
-				})
-			},
+			
 			goUserInfo(){
 				uni.navigateTo({
 					url:"/pages/user-info/user-info"
@@ -111,11 +101,7 @@
 					url:"/pages/update-password/update-password"
 				})
 			},
-			goMemberCenter(){
-				uni.navigateTo({
-					url:"/pages/member-center/member-center"
-				})
-			},
+			
 			quit(){
 				this.logout();
 				uni.showToast({

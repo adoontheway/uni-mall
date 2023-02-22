@@ -1,5 +1,12 @@
 <template>
 	<view class="list-body">
+		<uNavBar>
+			<view slot='left'>左边</view>
+			<view slot='right'>
+				<view>右边1</view>
+				<view>右边2</view>
+			</view>
+		</uNavBar>
 		<NewLine></NewLine>
 		<view class="list">
 			<block v-if="dataList.length > 0">
@@ -51,6 +58,7 @@
 
 <script>
 	import NewLine from "@/components/NewLine.vue";
+	import uNavBar from "@/components/uni/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue";
 	import { mapState } from 'vuex';
 	export default {
 		data() {
@@ -63,7 +71,8 @@
 			this.getData();
 		},
 		components:{
-			NewLine
+			NewLine,
+			uNavBar
 		},
 		computed:{
 			...mapState({
@@ -117,7 +126,7 @@
 
 <style scoped>
 .list-body {
-	margin-top: 180rpx;
+	/* margin-top: 180rpx; */
 }
 .list {
 	display: flex;

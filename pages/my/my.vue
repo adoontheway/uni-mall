@@ -14,6 +14,20 @@
 				</view>
 			</view>
 		</view>
+		<view class="sub-header">
+			<view class="sub-item">
+				<text>积分</text>
+				<text class="sub-number">100</text>
+			</view>
+			<view class="sub-item">
+				<text>优惠券</text>
+				<text class="sub-number">100</text>
+			</view>
+			<view class="sub-item">
+				<text>关注</text>
+				<text class="sub-number">100</text>
+			</view>
+		</view>
 		<!-- 订单相关 -->
 		<view class="order">
 			<view class="order-title" @tap='goOrder'>
@@ -44,18 +58,41 @@
 			</view>
 		</view>
 		
+		<view class="collections">
+			<view class="collection-item">
+				<image class="collection-img" src="http://cdn.adxwork.com/mall-app/static/img/order0.png"></image>
+				<text>我的收藏</text>
+			</view>
+			<view class="collection-item">
+				<text class="collection-number">100</text>
+				<text>商品</text>
+			</view>
+			<view class="collection-item">
+				<text class="collection-number">100</text>
+				<text>专题</text>
+			</view>
+			<view class="collection-item">
+				<text class="collection-number">100</text>
+				<text>话题</text>
+			</view>
+		</view>
+		
 		<!-- 内容列表 -->
 		<view class="my-content">
 			<view class="my-content-item">
-				<view>我的收藏</view>
+				<view>我的足迹</view>
+				<view class="f-color">></view>
+			</view>
+			<view class="my-content-item">
+				<view>我的评价</view>
 				<view class="f-color">></view>
 			</view>
 			<view class="my-content-item">
 				<view>我的优惠券</view>
 				<view class="f-color">></view>
 			</view>
-			<view class="my-content-item">
-				<view>我的积分</view>
+			<view class="my-content-item" @tap="goAddressList">
+				<view>地址管理</view>
 				<view class="f-color">></view>
 			</view>
 		</view>
@@ -67,6 +104,10 @@
 		</view>
 		
 		<view class="my-content">
+			<view class="my-content-item member-item" @tap="goMemberCenter">
+				<view>我是会员</view>
+				<view class="right-mark f-color"> 钻石会员 > </view>
+			</view>
 			<view class="my-content-item">
 				<view>帮助中心</view>
 				<view class="f-color">></view>
@@ -110,11 +151,16 @@
 					url:"/pages/my-orders/my-orders"
 				})
 			},
-			// goLogin(){
-			// 	uni.navigateTo({
-			// 		url:'/pages/login/login'
-			// 	})
-			// }
+			goAddressList(){
+				uni.navigateTo({
+					url:"/pages/address-list/address-list"
+				})
+			},
+			goMemberCenter(){
+				uni.navigateTo({
+					url:"/pages/member-center/member-center"
+				})
+			},
 		}
 	}
 </script>
@@ -125,6 +171,7 @@
 	width: 100%;
 	height: 400rpx;
 }
+
 .header-main {
 	position: relative;
 	top: 120rpx;
@@ -140,6 +187,25 @@
 	left: 50%;
 	margin-left: -60rpx;
 }
+
+.sub-header {
+	width: 100%;
+	height: 90rpx;
+	display: flex;
+	justify-content: space-evenly;
+}
+.sub-item {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.sub-number{
+	font-size: 32rpx;
+	font-weight: 500;
+	color: darkgreen;
+}
+
 .config-img {
 	width: 40rpx;
 	height: 40rpx;
@@ -187,5 +253,25 @@
 	align-items: center;
 	padding: 20rpx;
 	border-bottom: 2px solid #cccccc;
+}
+.collections {
+	padding: 20rpx;
+	display: flex;
+	border: 2rpx solid #cccccc;
+}
+.collection-item {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.collection-img {
+	width: 66rpx;
+	height: 66rpx;
+}
+.collection-number {
+	font-weight: 400;
+	font-size: 32rpx;
 }
 </style>

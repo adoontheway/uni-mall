@@ -120,5 +120,5 @@ export default {
 	INDEX,
 	RETURN,
 	COUPON,
-	COLLECTION
+	COLLECTION,
 }
