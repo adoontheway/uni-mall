@@ -4,6 +4,7 @@
 			class="brand-item"
 			v-for="(brand, bi) in dataList"
 			:key="bi"
+			@tap="goBrand(brand.id)"
 		>
 			<view class="brand-name">{{brand.name}}制造商</view>
 			<view class="brand-price">9.9元起</view>
@@ -24,6 +25,13 @@
 		},
 		props:{
 			dataList:Array,
+		},
+		methods:{
+			goBrand(id){
+				uni.navigateTo({
+					url:`/pages/Brand/Brand?id=${id}`
+				})
+			},
 		}
 	}
 </script>

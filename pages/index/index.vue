@@ -42,6 +42,7 @@
 					v-show="Object.keys(content['brandList']).length != 0"
 					title="品牌制造商直供" 
 					:showMore="true"
+					:moreCall="goBrandList"
 				>
 					<Brands :dataList="content['brandList']"></Brands>
 				</card-view>
@@ -58,6 +59,7 @@
 				<card-view
 					title="新鲜好物"
 					:showMore="true"
+					:moreCall="goNewList"
 					v-show="Object.keys(content['newProductList']).length != 0"
 				>
 					<Freshes :dataList="content['newProductList']"></Freshes>				
@@ -218,6 +220,14 @@
 				uni.switchTab({
 					url:"/pages/subject/subject"
 				})
+			},
+			goBrandList(){
+				uni.navigateTo({
+					url:'/pages/brand-list/brand-list'
+				})
+			},
+			goNewList(){
+				
 			}
 		}
 	}

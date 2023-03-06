@@ -322,6 +322,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/brand-list/brand-list",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "品牌制造商",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/Brand/Brand",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

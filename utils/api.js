@@ -49,10 +49,20 @@ const RETURN = {
 /**
  * 商品管理
  */
-const GOODS = {
+const PRODUCT = {
 	DETAIL:'/product/detail/{id}',
-	LIST:'/product/categoryTreeList',//以树形结构获取所有商品分类
-	SEARCH:'/product/search'//综合搜索、筛选、排序
+	TREE_LIST:'/product/categoryTreeList',//以树形结构获取所有商品分类
+	SEARCH:'/product/search',//综合搜索、筛选、排序
+	CREATE:'/product/create',//创建商品
+	UPDATE_INFO:'/product/updateInfo/{id}',//根据商品id获取商品编辑信息
+	UPDATE:'/product/update/{id}',//更新商品
+	LIST:'/product/list',//查询商品
+	SIMPLT_LIST:'/product/simpleList',//根据商品名称或货号模糊查询
+	VERIFY_STATUS:'/product/update/verifyStatus',//批量修改审核状态
+	PUBLISH_STATUS:'/product/update/publishStatus',//批量上下架商品
+	RECOMMAND_STATUS:'/product/update/recommendStatus',//批量推荐商品
+	NEW_STATUS:'/product/update/newStatus',//批量设为新品
+	DELETE_STATUS:'/product/update/deleteStatus',//批量修改删除状态
 };
 
 /**
@@ -109,16 +119,26 @@ const COUPON = {
 	LIST_PRODUCT:'/member/coupon/listByProduct/{productId}',//获取当前商品相关优惠券
 };
 
+/**
+ * 首页品牌推荐管理
+ */
+const BRAND = {
+	RECOMMENDS:'/brand/recommendList',//分页获取推荐品牌
+	DETAIL:'/brand/detail/{brandId}',//获取品牌详情
+	PRODUCTS:'/brand/productList',//分页获取品牌相关商品
+};
+
 export default {
 	ADDRESS,
 	CART,
 	ORDER, 
 	PAY,
-	GOODS,
+	PRODUCT,
 	LIST,
 	USER,
 	INDEX,
 	RETURN,
 	COUPON,
 	COLLECTION,
+	BRAND,
 }

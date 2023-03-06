@@ -37,7 +37,7 @@
 			<!-- todo 如何插入描述信息 -->
 			<!-- <p><img class=\"wscnph\" src=\"http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20180615/5b2254e8N414e6d3a.jpg\" width=\"500\" /></p> -->
 			<view>
-				<view>
+				<!-- <view>
 					<image class="detail-img" :src="goodsInfo.brand.logo"></image>
 				</view>
 				<view>
@@ -45,10 +45,11 @@
 				</view>
 				<view>
 					<image class="detail-img" src="http://cdn.adxwork.com/mall-app/static/img/preview2.png"></image>
-				</view>
-			<!-- 	<view>
-					<text v-html=""></text>
 				</view> -->
+				
+				<view v-html="goodsInfo.product.detailHtml">
+					
+				</view>
 			</view>
 		</block>
 		<view v-else>

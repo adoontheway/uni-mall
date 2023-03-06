@@ -15,7 +15,7 @@ export default {
 	mutations:{
 		initCategory(state, goodInfo){
 			$http.request({
-				url:API.GOODS.LIST,
+				url:API.PRODUCT.TREE_LIST,
 			}).then((res)=>{
 				state.dataList = res;
 			}).catch((e)=>{

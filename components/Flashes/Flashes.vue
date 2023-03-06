@@ -3,7 +3,7 @@
 		
 		<view class="time-view">
 			<view>
-				下一场{{flashObj.nextStartTime}}开始
+				下一场{{new Date(flashObj.nextStartTime).toLocaleString()}}开始
 			</view>
 			<view class="time-counter">
 				<view class="end-reminder">本场结束剩余</view>
@@ -14,16 +14,18 @@
 			class="flash-item"
 			v-for="(item, index) in flashObj['productList']"
 			:key="index"
+			@tap='goDetail(item.id)'
 		>
 			<view class="flash-content">
 				<image class="flash-img" :src="item.pic"></image>
 				<view class="flash-price">秒杀价 ¥{{item.flashPromotionPrice}}</view>
 				<view class="flash-name">{{item.name}}</view>
 				<view class="flash-subtitle">{{item.subTitle}}</view>
+				<view class="origin-price">
+					¥{{item.originalPrice}}
+				</view>
 			</view>
-			<view class="origin-price">
-				¥{{item.originalPrice}}
-			</view>
+			
 		</view>
 	</view>
 </template>
@@ -38,6 +40,13 @@
 		},
 		props:{
 			flashObj:Object,
+		},
+		methods:{
+			goDetail(item_id){
+				uni.navigateTo({
+					url:`/pages/detail/detail?id=${item_id}`
+				})
+			}
 		}
 	}
 </script>
@@ -48,7 +57,7 @@
 	display: flex;
 	padding: 10rpx;
 	flex-wrap: wrap;
-	border: 4rpx solid #333333;
+	/* border: 4rpx solid #333333; */
 }
 .flash-content {
 	width: 100%;
@@ -59,13 +68,27 @@
 	padding: 10rpx;
 }
 .flash-item {
-	border: 2rpx solid rebeccapurple;
 	width: 45vw;
 	height: 560rpx;
 }
+.img-con {
+}
+.origin-price {
+	position: relative;
+	width: 80rpx;
+	height: 80rpx;
+	line-height: 80rpx;
+	border-radius: 50%;
+	background-color: red;
+	color: white;
+	text-align: center;
+	top: -500rpx;
+	right: -130rpx;
+	font-size: 20rpx;
+}
 .flash-img {
 	height: 375rpx;
-	width: 100%;
+	width: 300rpx;
 }
 .flash-name{
 	overflow: hidden;
@@ -92,29 +115,23 @@
 	word-break: break-all;
 	padding: 6rpx 20rpx;
 }
-.origin-price {
-	position: absolute;
-	display: block;
-	top: 0rpx;
-	right: 10rpx;
-	width: 100rpx;
-	height: 100rpx;
-	line-height: 100rpx;
-	border-radius: 50%;
-	background-color: red;
-	color: white;
-	text-align: center;
-}
+
 
 .time-view {
 	display: flex;
+	align-items: center;
+	font-size: 20rpx;
+	text-align: center;
+	/* border: 2rpx solid rebeccapurple; */
+	width: 100%;
 }
 .end-reminder {
-	top: -20rpx;
 	right: 0rpx;
 	color: #cccccc;
+	
 }
 .time-counter {
 	flex: 1;
+	top: -50rpx;
 }
 </style>

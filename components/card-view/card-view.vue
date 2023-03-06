@@ -50,12 +50,13 @@
 
 <style scoped>
 .card-view{
-	padding: 20rpx;
+	padding: 10rpx;
 	margin-top: 10rpx;
 	width: 100%;
 	/* background-color: aliceblue; */
 }
 .header {
+	padding: 0 10rpx;
 	display: flex;
 	justify-content: space-between; 
 	align-items: center;
